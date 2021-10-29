@@ -34,6 +34,12 @@ public class Mejoras extends ElementoJuego implements Serializable {
 	public void setmImg(String mImg) {
 		this.mImg = mImg;
 	}
+	
+	@Override
+	public void efecto(int boost_clicks, int boost_prod, long produccion, long clicks) {
+		produccion += boost_prod;
+		clicks += boost_clicks;
+	}
 
 	
 	
