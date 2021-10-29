@@ -31,7 +31,7 @@ public class VentanaClick extends JFrame {
 		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_click));
 		puntuacion.setFont(new Font("Castellar", Font.BOLD, 20));
 		try {
-		    Image img = ImageIO.read(getClass().getResource("cerdito150.png"));
+		    Image img = ImageIO.read(getClass().getResource("stonks.jpg"));
 		    cerdito.setIcon(new ImageIcon(img));
 		  } catch (Exception ex) {
 		    System.out.println(ex);
