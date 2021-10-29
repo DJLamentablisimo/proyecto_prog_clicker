@@ -7,24 +7,24 @@ public class Mejoras extends ElementoJuego implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	long incremento;
+	long mincremento;
 	String mImg;
 	
 	public Mejoras(String nombre, long precio, long incremento, String img) {
 		super(precio,nombre);
 		this.precio = precio;
 		this.nombre = nombre;
-		this.incremento = incremento;
+		this.mincremento = incremento;
 		this.mImg = img;
 	
 	}
 
 	public long getIncremento() {
-		return incremento;
+		return mincremento;
 	}
 
 	public void setIncremento(long incremento) {
-		this.incremento = incremento;
+		this.mincremento = incremento;
 	}
 
 	public String getmImg() {
@@ -36,9 +36,11 @@ public class Mejoras extends ElementoJuego implements Serializable {
 	}
 	
 	@Override
-	public void efecto(int boost_clicks, int boost_prod, long produccion, long clicks) {
+	public void efecto(int boost_clicks, int boost_prod, int boost_cant, long produccion, long clicks, long cant, long tiempo) {
 		produccion += boost_prod;
 		clicks += boost_clicks;
+		cant += boost_cant;
+		
 	}
 
 	

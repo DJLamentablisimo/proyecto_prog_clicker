@@ -9,7 +9,7 @@ public class ElementoJuego {
 		this.nombre = nombre;
 	}
 	
-	public void efecto(int boost_clicks, int boost_prod, long produccion, long clicks) {
+	public void efecto(int boost_clicks, int boost_prod, int boost_cant, long produccion, long clicks, long cant, long tiempo) {
 		
 	}
 
