@@ -25,10 +25,10 @@ public class VentanaClick extends JFrame {
 	
 	public VentanaClick() {
 		
-		JPanel superior = new JPanel();
-		JButton cerdito = new JButton();
-		JLabel blanco = new JLabel();
-		JLabel puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_click));
+		superior = new JPanel();
+		cerdito = new JButton();
+		blanco = new JLabel();
+		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_click));
 		puntuacion.setFont(new Font("Castellar", Font.BOLD, 20));
 		try {
 		    Image img = ImageIO.read(getClass().getResource("cerdito150.png"));
