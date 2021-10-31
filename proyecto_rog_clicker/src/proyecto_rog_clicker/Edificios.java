@@ -1,47 +1,37 @@
 package proyecto_rog_clicker;
 
-public class Edificios {
-	String eNombre;
-	int eCoste;
-	int eCantidad;
+import java.io.Serializable;
+
+public class Edificios extends ElementoJuego implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -543235933317680342L;
+	long eCantidad;
 	int eProduccion;
 	String eImg;
 	
 	
-	public Edificios(String nombre, int coste, int cant, int prod, String image) {
-		this.eNombre=nombre;
-		this.eCoste=coste;
+	public Edificios( String nombre, long precio, long cant, int prod, String image) {
+		super(precio, nombre);
 		this.eCantidad=cant;
 		this.eProduccion=prod;
 		this.eImg=image;
 	}
 
-	public String geteNombre() {
-		return eNombre;
-	}
+	
 
-	public void seteNombre(String eNombre) {
-		this.eNombre = eNombre;
-	}
-
-	public int geteCoste() {
-		return eCoste;
-	}
-
-	public void seteCoste(int eCoste) {
-		this.eCoste = eCoste;
-	}
-
-	public int geteCantidad() {
+	public long geteCantidad() {
 		return eCantidad;
 	}
 
-	public void seteCantidad(int eCantidad) {
+	public void seteCantidad(long eCantidad) {
 		this.eCantidad = eCantidad;
 	}
 
-	public int geteProduccion() {
-		int suma = eCantidad*eProduccion;
+	public long geteProduccion() {
+		long suma = eCantidad*eProduccion;
 		return suma;
 	}
 
@@ -56,9 +46,14 @@ public class Edificios {
 	public void seteImg(String eImg) {
 		this.eImg = eImg;
 	}
+	public long incrementar(int num) {
+		long total = this.geteCantidad()+1;
+		return total;
+		
+	}
 	@Override
 	public String toString() {
-		return "Edificio: - "+this.eNombre+"("+this.eCoste+") - ["+this.eCantidad+" comprados -- "+this.eProduccion +" dineros/seg]"+ " . . . Producido hasta ahora: "+geteProduccion()+" dineros";
+		return "Edificio: - "+this.getNombre()+"("+this.getPrecio()+") - ["+this.eCantidad+" comprados -- "+this.eProduccion +" dineros/seg]"+ " . . . Producido hasta ahora: "+geteProduccion()+" dineros";
 	}
 	public static void main(String[] args) {
 		Edificios e1 = new Edificios("Banco", 300, 4, 5, "Imagen");

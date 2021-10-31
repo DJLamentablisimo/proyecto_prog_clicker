@@ -17,7 +17,7 @@ public class Apuestas extends ElementoJuego implements Serializable {
 	
 	
 	
-	public Apuestas(long precio, String nombre,long tiempo, long incremento, String img ) {
+	public Apuestas( String nombre, long precio,long tiempo, long incremento, String img ) {
 		super(precio, nombre);
 		this.precio = precio;
 		this.nombre = nombre;
