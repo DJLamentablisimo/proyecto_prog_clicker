@@ -128,7 +128,6 @@ public class VentanaClick extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dinero_click=dinero_click+1;
-				System.out.println(dinero_click);
 				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_click));
 			}
 		});
