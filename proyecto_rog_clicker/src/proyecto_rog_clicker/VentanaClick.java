@@ -42,7 +42,7 @@ public class VentanaClick extends JFrame {
 	public VentanaClick() {
 		boton = new JButton("Comprar");
 		ArrayList<Edificios> listaEdifs = new ArrayList<>();
-		Edificios e1 = new Edificios("Edificio1", 120, 0, 1, "imagen 1"); 
+		Edificios e1 = new Edificios("Edificio1", 120, 0, 1, "imagen 1"); //PRUEBA DAVID
 		Edificios e2 = new Edificios("Edificio2", 200, 0, 2, "imagen 2");
 		Edificios e3 = new Edificios("Edificio3", 250, 0, 3, "imagen 3");
 		Edificios e4 = new Edificios("Edificio4", 550, 0, 4, "imagen 4");
