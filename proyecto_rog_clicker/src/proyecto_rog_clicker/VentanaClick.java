@@ -26,56 +26,56 @@ public class VentanaClick extends JFrame {
 	private static final long serialVersionUID = -4776141433437148579L;
 	private JButton boton;
 	private JButton cerdito;
-	private JLabel alternativa;//Hecho por Asier
+	private JLabel alternativa;
 	private JLabel blanco;
 	private JLabel puntuacion;
 	private JPanel superior;
-	private JPanel inferior;//Hecho por Asier
-	private JPanel inferior1;//Hecho por Asier
-	private JPanel inferior2;//Hecho por Asier
-	private JPanel inferior3;//Hecho por Asier
-	private JList<Edificios> liste;//Hecho por Asier
-	private JScrollPane sPanel;//Hecho por Asier
+	private JPanel inferior;
+	private JPanel inferior1;
+	private JPanel inferior2;
+	private JPanel inferior3;
+	private JList<Edificios> liste;
+	private JScrollPane sPanel;
 	
 	int dinero_click = 0;
 	
 	public VentanaClick() {
 		boton = new JButton("Comprar");
-		ArrayList<Edificios> listaEdifs = new ArrayList<>();//Hecho por Asier
+		ArrayList<Edificios> listaEdifs = new ArrayList<>();
 		Edificios e1 = new Edificios("Edificio1", 120, 0, 1, "imagen 1"); 
-		Edificios e2 = new Edificios("Edificio2", 200, 0, 2, "imagen 2");//Hecho por Asier
-		Edificios e3 = new Edificios("Edificio3", 250, 0, 3, "imagen 3");//Hecho por Asier
-		Edificios e4 = new Edificios("Edificio4", 550, 0, 4, "imagen 4");//Hecho por Asier
-		Edificios e5 = new Edificios("Edificio5", 1000, 0, 5, "imagen 5");//Hecho por Asier
-		Edificios e6 = new Edificios("Edificio6", 2300, 0, 6, "imagen 6");//Hecho por Asier
-		Edificios e7 = new Edificios("Edificio7", 5000, 0, 7, "imagen 7");//Hecho por Asier
-		Edificios e8 = new Edificios("Edificio8", 7000, 0, 8, "imagen 3");//Hecho por Asier
-		Edificios e9 = new Edificios("Edificio9", 10000, 0, 9, "imagen 4");//Hecho por Asier
-		Edificios e10 = new Edificios("Edificio10", 20000, 0, 10, "imagen 5");//Hecho por Asier
-		Edificios e11 = new Edificios("Edificio11", 25000, 0, 11, "imagen 6");//Hecho por Asier
-		Edificios e12 = new Edificios("Edificio12", 30000, 0, 12, "imagen 7");//Hecho por Asier
-		Edificios e13 = new Edificios("Edificio13", 40000, 0, 13, "imagen 3");//Hecho por Asier
-		Edificios e14 = new Edificios("Edificio14", 50000, 0, 14, "imagen 4");//Hecho por Asier
-		Edificios e15 = new Edificios("Edificio15", 75000, 0, 15, "imagen 5");//Hecho por Asier
-		Edificios e16 = new Edificios("Edificio16", 100000, 0, 16, "imagen 6");//Hecho por Asier
-		Edificios e17 = new Edificios("Edificio17", 500000, 0, 17, "imagen 7");//Hecho por Asier
-		listaEdifs.add(e1);//Hecho por Asier
-		listaEdifs.add(e2);//Hecho por Asier
-		listaEdifs.add(e3);//Hecho por Asier
-		listaEdifs.add(e4);//Hecho por Asier
-		listaEdifs.add(e5);//Hecho por Asier
-		listaEdifs.add(e6);//Hecho por Asier
-		listaEdifs.add(e7);//Hecho por Asier
-		listaEdifs.add(e8);//Hecho por Asier
-		listaEdifs.add(e9);//Hecho por Asier
-		listaEdifs.add(e10);//Hecho por Asier
-		listaEdifs.add(e11);//Hecho por Asier
-		listaEdifs.add(e12);//Hecho por Asier
-		listaEdifs.add(e13);//Hecho por Asier
-		listaEdifs.add(e14);//Hecho por Asier
-		listaEdifs.add(e15);//Hecho por Asier
-		listaEdifs.add(e16);//Hecho por Asier
-		listaEdifs.add(e17);//Hecho por Asier
+		Edificios e2 = new Edificios("Edificio2", 200, 0, 2, "imagen 2");
+		Edificios e3 = new Edificios("Edificio3", 250, 0, 3, "imagen 3");
+		Edificios e4 = new Edificios("Edificio4", 550, 0, 4, "imagen 4");
+		Edificios e5 = new Edificios("Edificio5", 1000, 0, 5, "imagen 5");
+		Edificios e6 = new Edificios("Edificio6", 2300, 0, 6, "imagen 6");
+		Edificios e7 = new Edificios("Edificio7", 5000, 0, 7, "imagen 7");
+		Edificios e8 = new Edificios("Edificio8", 7000, 0, 8, "imagen 3");
+		Edificios e9 = new Edificios("Edificio9", 10000, 0, 9, "imagen 4");
+		Edificios e10 = new Edificios("Edificio10", 20000, 0, 10, "imagen 5");
+		Edificios e11 = new Edificios("Edificio11", 25000, 0, 11, "imagen 6");
+		Edificios e12 = new Edificios("Edificio12", 30000, 0, 12, "imagen 7");
+		Edificios e13 = new Edificios("Edificio13", 40000, 0, 13, "imagen 3");
+		Edificios e14 = new Edificios("Edificio14", 50000, 0, 14, "imagen 4");
+		Edificios e15 = new Edificios("Edificio15", 75000, 0, 15, "imagen 5");
+		Edificios e16 = new Edificios("Edificio16", 100000, 0, 16, "imagen 6");
+		Edificios e17 = new Edificios("Edificio17", 500000, 0, 17, "imagen 7");
+		listaEdifs.add(e1);
+		listaEdifs.add(e2);
+		listaEdifs.add(e3);
+		listaEdifs.add(e4);
+		listaEdifs.add(e5);
+		listaEdifs.add(e6);
+		listaEdifs.add(e7);
+		listaEdifs.add(e8);
+		listaEdifs.add(e9);
+		listaEdifs.add(e10);
+		listaEdifs.add(e11);
+		listaEdifs.add(e12);
+		listaEdifs.add(e13);
+		listaEdifs.add(e14);
+		listaEdifs.add(e15);
+		listaEdifs.add(e16);
+		listaEdifs.add(e17);
 		
 		boton.addActionListener(new ActionListener() {
 			
@@ -90,34 +90,34 @@ public class VentanaClick extends JFrame {
 		});
 		
 		
-		liste = new JList<>();//Hecho por Asier
-		sPanel = new JScrollPane(liste);//Hecho por Asier
+		liste = new JList<>();
+		sPanel = new JScrollPane(liste);
 		superior = new JPanel();
-		inferior = new JPanel();//Hecho por Asier
-		inferior1 = new JPanel();//Hecho por Asier
-		inferior2 = new JPanel();//Hecho por Asier
-		inferior2.add(sPanel);//Hecho por Asier
-		inferior3 = new JPanel();//Hecho por Asier
+		inferior = new JPanel();
+		inferior1 = new JPanel();
+		inferior2 = new JPanel();
+		inferior2.add(sPanel);
+		inferior3 = new JPanel();
 		inferior3.add(boton);
-		inferior.add(inferior1, BorderLayout.EAST);//Hecho por Asier
-		inferior.add(inferior2, BorderLayout.CENTER);//Hecho por Asier
-		inferior.add(inferior3, BorderLayout.WEST);//Hecho por Asier
+		inferior.add(inferior1, BorderLayout.EAST);
+		inferior.add(inferior2, BorderLayout.CENTER);
+		inferior.add(inferior3, BorderLayout.WEST);
 		
-		DefaultListModel<Edificios> dlist = new DefaultListModel<>();//Hecho por Asier
-		for(Edificios e : listaEdifs) {//Hecho por Asier
-			dlist.addElement(e);//Hecho por Asier
+		DefaultListModel<Edificios> dlist = new DefaultListModel<>();
+		for(Edificios e : listaEdifs) {
+			dlist.addElement(e);
 		}
-		liste.setModel(dlist);//Hecho por Asier
+		liste.setModel(dlist);
 		
 		cerdito = new JButton();
 		blanco = new JLabel();
-		alternativa = new JLabel();//Hecho por Asier
+		alternativa = new JLabel();
 		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_click));
 		
 		puntuacion.setFont(new Font("Castellar", Font.BOLD, 20));
 		try {
 		    Image img = ImageIO.read(getClass().getResource("the wock.png"));
-		    alternativa.setIcon(new ImageIcon(img));//Hecho por Asier
+		    alternativa.setIcon(new ImageIcon(img));
 		    //cerdito.setIcon(new ImageIcon(img));
 		  } catch (Exception ex) {
 		    System.out.println(ex);
@@ -131,7 +131,7 @@ public class VentanaClick extends JFrame {
 				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_click));
 			}
 		});
-		//Alternativa 2 - Label //Hecho por Asier
+		//Alternativa 2 - Label 
 		alternativa.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -150,7 +150,7 @@ public class VentanaClick extends JFrame {
 		//superior.add(cerdito, BorderLayout.CENTER);
 		superior.add(puntuacion, BorderLayout.WEST);
 		getContentPane().add(superior, BorderLayout.NORTH);
-		getContentPane().add(inferior, BorderLayout.SOUTH);//Hecho por Asier
+		getContentPane().add(inferior, BorderLayout.SOUTH);
 		
 	}
 	
