@@ -102,16 +102,20 @@ public class VentanaClick extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if(!e.getValueIsAdjusting()) {
 				Edificios edf = (Edificios) liste.getSelectedValue();
+				if(liste.getSelectedValue()!=null) {
 				if(dinero_click >= edf.precio) {
 				edf.seteCantidad(edf.incrementar(1));
 				dinero_click = (int) (dinero_click- edf.precio);
 				dinero_por_segundo = dinero_por_segundo+edf.eProduccion;
+				liste.clearSelection();
 				}
 				else {
 						
 					System.out.println("no tienes pasta");
+					liste.clearSelection();
 				}
 				logger.info("Incrementa");;
+				}
 			}
 			}
 		});
