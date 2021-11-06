@@ -19,13 +19,14 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 
 public class VentanaClick extends JFrame {
 
 	private static final long serialVersionUID = -4776141433437148579L;
-	private JButton boton;
 	private JButton cerdito;
 	private JLabel alternativa;
 	private JLabel blanco;
@@ -42,9 +43,8 @@ public class VentanaClick extends JFrame {
 	
 	public VentanaClick() {
 		Logger logger = Logger.getLogger(VentanaClick.class.getName());
-		boton = new JButton("Comprar");
 		ArrayList<Edificios> listaEdifs = new ArrayList<>();
-		Edificios e1 = new Edificios("Edificio1", 120, 0, 1, "imagen 1"); //PRUEBA DAVID
+		Edificios e1 = new Edificios("Edificio1", 120, 0, 1, "imagen 1"); 
 		Edificios e2 = new Edificios("Edificio2", 200, 0, 2, "imagen 2");
 		Edificios e3 = new Edificios("Edificio3", 250, 0, 3, "imagen 3");
 		Edificios e4 = new Edificios("Edificio4", 550, 0, 4, "imagen 4");
@@ -79,20 +79,12 @@ public class VentanaClick extends JFrame {
 		listaEdifs.add(e16);
 		listaEdifs.add(e17);
 		
-		boton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Edificios xdd = (Edificios) liste.getSelectedValue();
-				xdd.seteCantidad(xdd.incrementar(1));
-				logger.info("Incrementa");;
-					
-				
-			}
-		});
+
 		
 		
 		liste = new JList<>();
+		liste.setFixedCellHeight(90);
+		liste.setFixedCellWidth(600);
 		sPanel = new JScrollPane(liste);
 		superior = new JPanel();
 		inferior = new JPanel();
@@ -100,7 +92,6 @@ public class VentanaClick extends JFrame {
 		inferior2 = new JPanel();
 		inferior2.add(sPanel);
 		inferior3 = new JPanel();
-		inferior3.add(boton);
 		inferior.add(inferior1, BorderLayout.EAST);
 		inferior.add(inferior2, BorderLayout.CENTER);
 		inferior.add(inferior3, BorderLayout.WEST);
@@ -111,6 +102,20 @@ public class VentanaClick extends JFrame {
 		}
 		liste.setModel(dlist);
 		
+		liste.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if(!e.getValueIsAdjusting()) {
+				Edificios edf = (Edificios) liste.getSelectedValue();
+				edf.seteCantidad(edf.incrementar(1));
+			
+				logger.info("Incrementa");;
+			}
+			}
+		});
+		
+
 		cerdito = new JButton();
 		blanco = new JLabel();
 		alternativa = new JLabel();
