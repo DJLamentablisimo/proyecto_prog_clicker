@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -40,6 +41,7 @@ public class VentanaClick extends JFrame {
 	int dinero_click = 0;
 	
 	public VentanaClick() {
+		Logger logger = Logger.getLogger(VentanaClick.class.getName());
 		boton = new JButton("Comprar");
 		ArrayList<Edificios> listaEdifs = new ArrayList<>();
 		Edificios e1 = new Edificios("Edificio1", 120, 0, 1, "imagen 1"); //PRUEBA DAVID
@@ -83,7 +85,7 @@ public class VentanaClick extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Edificios xdd = (Edificios) liste.getSelectedValue();
 				xdd.seteCantidad(xdd.incrementar(1));
-				System.out.println(xdd);
+				logger.info("Incrementa");;
 					
 				
 			}
@@ -128,6 +130,7 @@ public class VentanaClick extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dinero_click=dinero_click+1;
+				logger.info("click");
 				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_click));
 			}
 		});
@@ -137,7 +140,7 @@ public class VentanaClick extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				dinero_click=dinero_click+1;
-				System.out.println(dinero_click);
+				logger.info("click");
 				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_click));
 				
 			}
