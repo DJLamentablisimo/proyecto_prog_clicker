@@ -22,6 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import proyecto_rog_clicker.VentanaClick.HiloDineroPorSegundo;
+
 
 
 public class VentanaClick extends JFrame {
@@ -30,7 +32,7 @@ public class VentanaClick extends JFrame {
 	private JButton cerdito;
 	private JLabel alternativa;
 	private JLabel blanco;
-	private JLabel puntuacion;
+	private static JLabel puntuacion;
 	private JPanel superior;
 	private JPanel inferior;
 	private JPanel inferior1;
@@ -39,7 +41,8 @@ public class VentanaClick extends JFrame {
 	private JList<Edificios> liste;
 	private JScrollPane sPanel;
 	
-	int dinero_click = 0;
+	static int dinero_click = 0;
+	static int dinero_por_segundo=1;
 	
 	public VentanaClick() {
 		Logger logger = Logger.getLogger(VentanaClick.class.getName());
@@ -171,5 +174,24 @@ public class VentanaClick extends JFrame {
 		v.setTitle("Business Go Boom");
 		v.setLocation(150, 10);
 		v.setMinimumSize(v.getSize());
+		HiloDineroPorSegundo a = new HiloDineroPorSegundo();
+		a.start();
+	}
+	
+	static class HiloDineroPorSegundo extends Thread{
+		@Override
+			public void run() {
+					try {
+						while (true){	
+						Thread.sleep(1000);
+						dinero_click = dinero_click+dinero_por_segundo;
+						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_click));
+					} 
+				}
+				catch (Exception e) {
+					System.out.println(" ");
+
+			}
+		}
 	}
 }
