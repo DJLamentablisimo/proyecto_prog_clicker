@@ -67,6 +67,8 @@ public class VentanaClick extends JFrame {
 		liste = new JList<>();
 		liste.setFixedCellHeight(90);
 		liste.setFixedCellWidth(600);
+		liste.setFont(new Font("Arial", Font.ITALIC, 30));
+		liste.setAutoscrolls(true);
 		sPanel = new JScrollPane(liste);
 		superior = new JPanel();
 		
