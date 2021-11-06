@@ -189,7 +189,7 @@ public class VentanaClick extends JFrame {
 					} 
 				}
 				catch (Exception e) {
-					System.out.println(" ");
+					System.out.println(e);
 
 			}
 		}
