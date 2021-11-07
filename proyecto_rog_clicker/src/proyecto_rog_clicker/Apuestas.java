@@ -17,11 +17,10 @@ public class Apuestas extends ElementoJuego implements Serializable {
 	
 	
 	
-	public Apuestas( String nombre, long precio,long tiempo, long incremento, String img ) {
+	public Apuestas( String nombre, long precio, long incremento, String img ) {
 		super(precio, nombre);
 		this.precio = precio;
 		this.nombre = nombre;
-		this.tiempo = tiempo;
 		this.aincremento = incremento;
 		this.aimg = img;
 		
@@ -59,14 +58,34 @@ public class Apuestas extends ElementoJuego implements Serializable {
 	
 	//TODO método para gestionar tiempo 
 	@Override
-	public void efecto(int boost_clicks, int boost_prod, int boost_cant, long produccion, long clicks, long cant) {
-	
-		produccion += boost_prod;
+	public void efecto(long boost_clicks, long boost_prod, long boost_cant, long produccion, long clicks, long cant) {
+		int valorRNG = (int) Math.floor(Math.random()*2);
 		
+		if(valorRNG==0) {
+			produccion += boost_prod;		
+			clicks += boost_clicks;		
+			cant += boost_cant;
+		}
 		
-		clicks += boost_clicks;
-		
-		cant += boost_cant;
-		
+		if(valorRNG==1) {
+			if((produccion - boost_prod)<=0) {
+				produccion = 0;
+			} else if((produccion - boost_prod)>0) {
+				produccion -= boost_prod;
+			}
+			
+			if((clicks - boost_clicks)<=0) {
+				clicks = 0;
+			} else if((clicks - boost_clicks)>0) {
+				clicks -= boost_clicks;
+			}
+			
+			if((cant - boost_cant)<=0) {
+				cant = 0;
+			} else if((cant - boost_cant)>0) {
+				cant -= boost_cant;
+			}
+			
+		}
 	}
 }
