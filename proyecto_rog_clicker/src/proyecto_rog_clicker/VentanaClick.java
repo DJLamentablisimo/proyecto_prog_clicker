@@ -6,8 +6,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -38,6 +42,7 @@ public class VentanaClick extends JFrame {
 	private JPanel superior;
 	private JPanel inferior;
 	private JPanel pMenuSup;
+	private HiloDineroPorSegundo hilo;
 
 	private JList<Edificios> liste;
 	
@@ -137,7 +142,8 @@ public class VentanaClick extends JFrame {
 		
 		//Creacion de Menu para la ventana
 		JMenuBar menub = new JMenuBar();
-		JMenu menu = new JMenu("Menu                                                                       ");
+		JMenu menu = new JMenu("                                Menu                                       ");
+		menu.setFont(new Font("Arial", Font.ITALIC,20));
 		JMenuItem menuitem1 = new JMenuItem("Opcion 1");
 		JMenuItem menuitem2 = new JMenuItem("Opcion 2");
 		JMenuItem menuitem3 = new JMenuItem("Salir");
@@ -187,6 +193,14 @@ public class VentanaClick extends JFrame {
 			}
 		});
 		
+		menuitem3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
 		//Añadir imagen al JLabel
 		try {
 		    Image img = ImageIO.read(getClass().getResource("the wock.png"));
@@ -218,19 +232,64 @@ public class VentanaClick extends JFrame {
 		add(superior, BorderLayout.CENTER);
 		add(inferior, BorderLayout.SOUTH);
 		
+		addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				hilo.interrupt();
+				
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				System.out.println("Cerrado");
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				hilo = new HiloDineroPorSegundo();
+				hilo.start();
+				
+			}
+		});
+		
 	}
 	
 	public static void main(String[] args) {
 		VentanaClick v = new VentanaClick();
 		v.setSize(1680, 1020);
 		v.setVisible(true);
-		v.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		v.setAlwaysOnTop(true);
 		v.setTitle("Business Go Boom");
 		v.setLocation(150, 10);
 		v.setMinimumSize(v.getSize());
-		HiloDineroPorSegundo a = new HiloDineroPorSegundo();
-		a.start();
+		v.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 	}
 	private static void anyadirEdificios( String nombre, long precio, long cant, int prod, String image, ArrayList<Edificios> array) {
 		Edificios edif = new Edificios(nombre,precio,cant,prod,image);
