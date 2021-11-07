@@ -1,7 +1,9 @@
 package proyecto_rog_clicker;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -30,11 +32,23 @@ public class VentanaClick extends JFrame {
 	private static JLabel puntuacion;
 	private JPanel superior;
 	private JPanel inferior;
+
 	private JList<Edificios> liste;
 	
 	private JScrollPane sPanel;
 	private JScrollPane pMejoras;
+	
 	private JPanel pApuestas;
+	private JLabel apuesta1;
+	private JLabel apuesta2;
+	private JLabel apuesta3;
+	private JLabel apuesta4;
+	private JLabel apuesta5;
+	private JLabel blanco1;
+	private JLabel blanco2;
+	private JLabel blanco3;
+	private JLabel blanco4;
+	private JLabel blanco5;
 	
 	static int dinero_click = 0;
 	static int dinero_por_segundo=1;
@@ -76,9 +90,36 @@ public class VentanaClick extends JFrame {
 		pMejoras = new JScrollPane();
 		pApuestas = new JPanel();
 		
-		inferior.add(pApuestas, BorderLayout.EAST);
-		inferior.add(sPanel, BorderLayout.CENTER);
-		inferior.add(pMejoras, BorderLayout.WEST);
+		//inferior.add(pApuestas, BorderLayout.EAST);
+		
+		
+		
+		apuesta1=new JLabel();
+		apuesta1.setBackground(Color.BLUE);
+		apuesta2=new JLabel();
+		apuesta2.setBackground(Color.RED);
+		apuesta3=new JLabel();
+		apuesta3.setBackground(Color.GREEN);
+		apuesta4=new JLabel();
+		apuesta4.setBackground(Color.GRAY);
+		apuesta5=new JLabel();
+		apuesta5.setBackground(Color.PINK);
+		blanco1=new JLabel();
+		blanco2=new JLabel();
+		blanco3=new JLabel();
+		blanco4=new JLabel();
+		blanco5=new JLabel();
+		pApuestas.setLayout(new GridLayout(5, 2));
+		pApuestas.add(apuesta1);
+		pApuestas.add(blanco1);
+		pApuestas.add(blanco2);
+		pApuestas.add(apuesta2);
+		pApuestas.add(apuesta3);
+		pApuestas.add(blanco3);
+		pApuestas.add(blanco4);
+		pApuestas.add(apuesta4);
+		pApuestas.add(apuesta5);
+		pApuestas.add(blanco5);
 		
 		blanco = new JLabel();
 		alternativa = new JLabel();
@@ -144,9 +185,13 @@ public class VentanaClick extends JFrame {
 		});
 		
 		//Añadir todos los paneles a la Ventana
+		inferior.add(sPanel, BorderLayout.CENTER);
+		inferior.add(pMejoras, BorderLayout.WEST);
+		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(superior, BorderLayout.NORTH);
-		getContentPane().add(inferior, BorderLayout.SOUTH);
+		getContentPane().add(inferior, BorderLayout.CENTER);
+		getContentPane().add(pApuestas, BorderLayout.WEST);
 		
 	}
 	

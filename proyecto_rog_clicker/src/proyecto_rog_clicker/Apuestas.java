@@ -59,13 +59,13 @@ public class Apuestas extends ElementoJuego implements Serializable {
 	
 	//TODO método para gestionar tiempo 
 	@Override
-	public void efecto(int boost_clicks, int boost_prod, int boost_cant, long produccion, long clicks, long cant, long tiempo) {
-		while(tiempo!=0) {
+	public void efecto(int boost_clicks, int boost_prod, int boost_cant, long produccion, long clicks, long cant) {
+	
 		produccion += boost_prod;
-		}
-		while(tiempo!=0) {
+		
+		
 		clicks += boost_clicks;
-		}
+		
 		cant += boost_cant;
 		
 	}
