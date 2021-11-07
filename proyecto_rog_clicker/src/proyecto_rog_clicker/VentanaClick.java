@@ -138,6 +138,7 @@ public class VentanaClick extends JFrame {
 				if(dinero_total>=100) {
 					dinero_total-=apuesta01.getPrecio();
 					dinero_total=apuesta01.efecto(apuesta01.getAincremento(),dinero_total);
+					
 					puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
 					logger.info("La apuesta 1 tiene efecto");
 				}
