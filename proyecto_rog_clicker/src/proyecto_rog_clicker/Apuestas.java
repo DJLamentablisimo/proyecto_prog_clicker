@@ -56,7 +56,14 @@ public class Apuestas extends ElementoJuego implements Serializable {
 		this.tiempo = tiempo;
 	}
 	
-	//TODO método para gestionar tiempo 
+	
+	@Override
+	public String toString() {
+		return "Apuestas [aincremento=" + aincremento + ", aimg=" + aimg + ", tiempo=" + tiempo + "]";
+	}
+
+
+
 	@Override
 	public void efecto(long boost_clicks, long boost_prod, long boost_cant, long produccion, long clicks, long cant) {
 		int valorRNG = (int) Math.floor(Math.random()*2);
