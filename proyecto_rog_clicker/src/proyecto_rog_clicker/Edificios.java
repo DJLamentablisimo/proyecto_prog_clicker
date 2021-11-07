@@ -56,8 +56,5 @@ public class Edificios extends ElementoJuego implements Serializable {
 	public String toString() {
 		return "Edificio: - "+this.getNombre()+"( "+this.getPrecio()+" )";
 	}
-	public static void main(String[] args) {
-		Edificios e1 = new Edificios("Banco", 300, 4, 5, "Imagen");
-		System.out.println(e1);
-	}
+	
 }

@@ -2,6 +2,7 @@ package proyecto_rog_clicker;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -13,9 +14,13 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
@@ -32,11 +37,13 @@ public class VentanaClick extends JFrame {
 	private static JLabel puntuacion;
 	private JPanel superior;
 	private JPanel inferior;
+	private JPanel pMenuSup;
 
 	private JList<Edificios> liste;
 	
 	private JScrollPane sPanel;
 	private JScrollPane pMejoras;
+	private JButton bJuegoExtra;
 	
 	private JPanel pApuestas;
 	private JLabel apuesta1;
@@ -82,17 +89,18 @@ public class VentanaClick extends JFrame {
 		liste.setFixedCellHeight(90);
 		liste.setFixedCellWidth(600);
 		liste.setFont(new Font("Arial", Font.ITALIC, 30));
-		liste.setAutoscrolls(true);
+		
 		sPanel = new JScrollPane(liste);
 		superior = new JPanel();
-		
+		superior.setBackground(Color.red);
+		pMenuSup = new JPanel();
+		pMenuSup.setLayout(new GridLayout(1,2));
 		inferior = new JPanel();
+		inferior.setLayout(new GridLayout(1,3));
+		inferior.setBackground(Color.orange);
 		pMejoras = new JScrollPane();
 		pApuestas = new JPanel();
-		
-		//inferior.add(pApuestas, BorderLayout.EAST);
-		
-		
+		bJuegoExtra=new JButton("Juego extra");
 		
 		apuesta1=new JLabel();
 		apuesta1.setBackground(Color.BLUE);
@@ -126,6 +134,21 @@ public class VentanaClick extends JFrame {
 		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_click));
 		
 		puntuacion.setFont(new Font("Castellar", Font.BOLD, 20));
+		
+		//Creacion de Menu para la ventana
+		JMenuBar menub = new JMenuBar();
+		JMenu menu = new JMenu("Menu                                                                       ");
+		JMenuItem menuitem1 = new JMenuItem("Opcion 1");
+		JMenuItem menuitem2 = new JMenuItem("Opcion 2");
+		JMenuItem menuitem3 = new JMenuItem("Salir");
+		
+		menub.add(menu);
+		menu.add(menuitem1);
+		menu.add(menuitem2);
+		menu.add(menuitem3);
+		
+		pMenuSup.add(menub, BorderLayout.EAST);
+		pMenuSup.add(bJuegoExtra, BorderLayout.WEST);
 		
 		superior.add(blanco, BorderLayout.EAST);
 		superior.add(alternativa, BorderLayout.CENTER);
@@ -185,13 +208,15 @@ public class VentanaClick extends JFrame {
 		});
 		
 		//Añadir todos los paneles a la Ventana
+		inferior.add(pApuestas, BorderLayout.EAST);
 		inferior.add(sPanel, BorderLayout.CENTER);
 		inferior.add(pMejoras, BorderLayout.WEST);
 		
-		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(superior, BorderLayout.NORTH);
-		getContentPane().add(inferior, BorderLayout.CENTER);
-		getContentPane().add(pApuestas, BorderLayout.WEST);
+		
+		setLayout(new BorderLayout());
+		add(pMenuSup, BorderLayout.NORTH);
+		add(superior, BorderLayout.CENTER);
+		add(inferior, BorderLayout.SOUTH);
 		
 	}
 	
@@ -211,6 +236,7 @@ public class VentanaClick extends JFrame {
 		Edificios edif = new Edificios(nombre,precio,cant,prod,image);
 		array.add(edif);
 	}
+
 	
 	static class HiloDineroPorSegundo extends Thread{
 		@Override
