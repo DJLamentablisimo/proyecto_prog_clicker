@@ -36,11 +36,9 @@ public class Mejoras extends ElementoJuego implements Serializable {
 	}
 	
 	@Override
-	public void efecto(long boost_clicks, long boost_prod, long boost_cant, long produccion, long clicks, long cant) {
-		produccion += boost_prod;
-		clicks += boost_clicks;
-		cant += boost_cant;
-		
+	public long efecto(long boost, long cant) {
+		cant += boost;
+		return 0;
 	}
 
 	

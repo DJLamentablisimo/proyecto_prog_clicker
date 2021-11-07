@@ -65,34 +65,23 @@ public class Apuestas extends ElementoJuego implements Serializable {
 
 
 	@Override
-	public void efecto(long boost_clicks, long boost_prod, long boost_cant, long produccion, long clicks, long cant) {
+	public long efecto(long boost,long cant) {
 		int valorRNG = (int) Math.floor(Math.random()*2);
+		System.out.println(valorRNG);
 		
 		if(valorRNG==0) {
-			produccion += boost_prod;		
-			clicks += boost_clicks;		
-			cant += boost_cant;
+			return cant += boost;
 		}
 		
 		if(valorRNG==1) {
-			if((produccion - boost_prod)<=0) {
-				produccion = 0;
-			} else if((produccion - boost_prod)>0) {
-				produccion -= boost_prod;
-			}
-			
-			if((clicks - boost_clicks)<=0) {
-				clicks = 0;
-			} else if((clicks - boost_clicks)>0) {
-				clicks -= boost_clicks;
-			}
-			
-			if((cant - boost_cant)<=0) {
-				cant = 0;
-			} else if((cant - boost_cant)>0) {
-				cant -= boost_cant;
+			if((cant - boost)<=0) {
+				return cant = 0;
+			} else if((cant - boost)>0) {
+				return cant -= boost;
 			}
 			
 		}
+		
+		return 69;
 	}
 }

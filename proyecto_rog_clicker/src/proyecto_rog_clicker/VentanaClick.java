@@ -12,7 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import java.awt.event.MouseListener;
-
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class VentanaClick extends JFrame {
 	private JPanel superior;
 	private JPanel inferior;
 
-	private int cooldown;
+	static int cooldown;
 
 	private JPanel pMenuSup;
 	private HiloDineroPorSegundo hilo;
@@ -69,8 +69,8 @@ public class VentanaClick extends JFrame {
 	private JLabel blanco4;
 	private JLabel blanco5;
 	
-	static int dinero_total = 0;
-	static int dinero_por_segundo=100;  //Esta puesto a cero porque parte sin producción
+	static long dinero_total = 0;
+	static int dinero_por_segundo=0;  //Esta puesto a cero porque parte sin producción
 	static int dinero_click=1;
 	
 	public VentanaClick() {
@@ -98,7 +98,7 @@ public class VentanaClick extends JFrame {
 		anyadirEdificios("Edificio17", 500000, 0, 17, "imagen 7", listaEdifs);	
 		
 		//Creación de apuestas
-		Apuestas apuesta01= new Apuestas("Préstamo inestable",1, Double.valueOf(dinero_total*0.05).longValue(), "" );
+		Apuestas apuesta01= new Apuestas("Préstamo inestable",99, Double.valueOf(dinero_total*0.05).longValue(), "" );
 		
 		//Creación de componentes de la ventana
 		liste = new JList<>();
@@ -108,12 +108,10 @@ public class VentanaClick extends JFrame {
 		
 		sPanel = new JScrollPane(liste);
 		superior = new JPanel();
-		superior.setBackground(Color.red);
 		pMenuSup = new JPanel();
 		pMenuSup.setLayout(new GridLayout(1,2));
 		inferior = new JPanel();
 		inferior.setLayout(new GridLayout(1,3));
-		inferior.setBackground(Color.orange);
 		pMejoras = new JScrollPane();
 		pApuestas = new JPanel();
 		bJuegoExtra=new JButton("Juego extra");
@@ -121,19 +119,7 @@ public class VentanaClick extends JFrame {
 		apuesta1=new JLabel(apuesta01.getNombre());
 		apuesta1.setBackground(Color.BLUE);
 		apuesta1.setOpaque(true);
-		apuesta1.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+		apuesta1.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -149,9 +135,10 @@ public class VentanaClick extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(dinero_total>=apuesta01.getPrecio()) {
+				if(dinero_total>=100) {
 					dinero_total-=apuesta01.getPrecio();
-					apuesta01.efecto(0, 0, apuesta01.getAincremento(), 0, 0, dinero_total);
+					dinero_total=apuesta01.efecto(apuesta01.getAincremento(),dinero_total);
+					puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
 					logger.info("La apuesta 1 tiene efecto");
 				}
 			}
@@ -238,7 +225,7 @@ public class VentanaClick extends JFrame {
 					System.out.println("no tienes pasta");
 					liste.clearSelection();
 				}
-				logger.info("Incrementa");;
+				logger.info("Incrementa");
 				}
 			}
 			}
@@ -292,31 +279,7 @@ public class VentanaClick extends JFrame {
 		add(inferior, BorderLayout.SOUTH);
 		//add(pApuestas, BorderLayout.WEST);
 		
-		addWindowListener(new WindowListener() {
-			
-			@Override
-			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+		addWindowListener(new WindowAdapter() {
 			
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -368,7 +331,6 @@ public class VentanaClick extends JFrame {
 						dinero_total = dinero_total+dinero_por_segundo;
 						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
 						if(dinero_total>100) {
-							long precio01_hilo1 = Double.valueOf(dinero_total*0.01).longValue();
 						
 						}
 					} 
