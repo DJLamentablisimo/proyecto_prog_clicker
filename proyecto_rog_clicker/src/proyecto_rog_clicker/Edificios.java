@@ -31,8 +31,7 @@ public class Edificios extends ElementoJuego implements Serializable {
 	}
 
 	public long geteProduccion() {
-		long suma = eCantidad*eProduccion;
-		return suma;
+		return eProduccion;
 	}
 
 	public void seteProduccion(int eProduccion) {
@@ -54,7 +53,7 @@ public class Edificios extends ElementoJuego implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Edificio: - "+this.getNombre()+"( "+this.getPrecio()+" )";
+		return this.getNombre()+"( "+this.getPrecio()+"$ )"+"  "+this.geteProduccion()+"$/s";
 	}
 	
 }
