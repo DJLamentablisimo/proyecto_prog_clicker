@@ -53,7 +53,7 @@ public class Edificios extends ElementoJuego implements Serializable {
 
 	@Override
 	public String toString() {
-		return this.getNombre()+"( "+this.getPrecio()+"$ )"+"  "+this.geteProduccion()+"$/s";
+		return this.getNombre()+"("+this.getPrecio()+"$)"+" // "+this.geteProduccion()+"$/s // "+this.geteCantidad()+" Obtenidos";
 	}
 	
 }
