@@ -40,6 +40,7 @@ public class VentanaClick extends JFrame {
 	private JLabel alternativa;
 	private JLabel blanco;
 	private static JLabel puntuacion;
+	private static JLabel produccion;
 	private JPanel superior;
 	private JPanel inferior;
 
@@ -60,9 +61,11 @@ public class VentanaClick extends JFrame {
 	private JLabel blanco1;
 
 	
-	static long dinero_total = 0;
+	static long dinero_total = 100;
 	static int dinero_por_segundo=1;  //Esta puesto a cero porque parte sin producción
 	static int dinero_click=1;
+	
+	private JPanel panelProduccion;
 	
 	public VentanaClick() {
 		//Creacion de Logger que utilizaremos para comentar parte del codigo y su funcionamiento.
@@ -100,12 +103,16 @@ public class VentanaClick extends JFrame {
 		sPanel = new JScrollPane(liste);
 		superior = new JPanel();
 		pMenuSup = new JPanel();
+		panelProduccion = new JPanel();
+		panelProduccion.setLayout(new GridLayout(2,1));
 		pMenuSup.setLayout(new GridLayout(1,4));
 		inferior = new JPanel();
 		inferior.setLayout(new GridLayout(1,3));
 		pMejoras = new JScrollPane();
 		pApuestas = new JPanel();
 		bJuegoExtra=new JButton("Juego extra");
+		bJuegoExtra.setBackground(Color.black);
+		bJuegoExtra.setForeground(Color.white);
 		
 		apuesta1=new JLabel(apuesta01.getNombre());
 		apuesta1.setBackground(Color.BLUE);
@@ -146,23 +153,31 @@ public class VentanaClick extends JFrame {
 
 		blanco = new JLabel();
 		alternativa = new JLabel();
-		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_total));
 		
+		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_total));
 		puntuacion.setFont(new Font("Castellar", Font.BOLD, 20));
+		produccion = new JLabel("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
+		produccion.setFont(new Font("Castellar", Font.ITALIC, 11));
+		panelProduccion.add(puntuacion);
+		panelProduccion.add(produccion);
 		
 		//Creacion de Menu para la ventana
 		JMenuBar menub = new JMenuBar();
-		JMenu menu = new JMenu("                      Menu                     ");
+		JMenu menu = new JMenu("                      Menu                                                                  ");
+		menub.setBackground(Color.black);
 		menu.setFont(new Font("Arial", Font.ITALIC,20));
+		menu.setForeground(Color.white);
 		JMenuItem menuitem1 = new JMenuItem("Cambiar contraseña");
 		JMenuItem menuitem2 = new JMenuItem("Reiniciar partida");
-		JMenuItem menuitem5 = new JMenuItem("Salir");
 		JMenuItem menuitem3 = new JMenuItem("Estadisticas del jugador");
+		JMenuItem menuitem4 = new JMenuItem("Guardar progreso");
+		JMenuItem menuitem5 = new JMenuItem("Salir");
 		
 		menub.add(menu);
 		menu.add(menuitem1);
 		menu.add(menuitem2);
 		menu.add(menuitem3);
+		menu.add(menuitem4);
 		menu.add(menuitem5);
 		
 		pMenuSup.add(menub);
@@ -172,7 +187,7 @@ public class VentanaClick extends JFrame {
 		
 		superior.add(blanco, BorderLayout.EAST);
 		superior.add(alternativa, BorderLayout.CENTER);
-		superior.add(puntuacion, BorderLayout.WEST);
+		superior.add(panelProduccion, BorderLayout.WEST);
 		
 		
 		//Creación de modelo de JList y asignacion a la JList.
@@ -237,6 +252,14 @@ public class VentanaClick extends JFrame {
 		//Opcion3
 		
 		//Opcion4
+		menuitem4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		
 		//Opcion5
 		menuitem5.addActionListener(new ActionListener() {
@@ -348,6 +371,7 @@ public class VentanaClick extends JFrame {
 						Thread.sleep(1000);
 						dinero_total = dinero_total+dinero_por_segundo;
 						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+						produccion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
 						if(dinero_total>100) {
 						
 						}
