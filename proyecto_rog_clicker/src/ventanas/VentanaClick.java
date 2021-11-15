@@ -1,4 +1,4 @@
-package proyecto_rog_clicker;
+package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,6 +30,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import clases.Apuestas;
+import clases.Edificios;
 
 
 
@@ -205,10 +208,10 @@ public class VentanaClick extends JFrame {
 					if(liste.getSelectedValue()!=null) {
 						if(!e.getValueIsAdjusting()) {
 							Edificios edf = (Edificios) liste.getSelectedValue();
-							if(dinero_total >= edf.precio) {
+							if(dinero_total >= edf.getPrecio()) {
 								edf.seteCantidad(edf.incrementar(1));
-								dinero_total = (int) (dinero_total- edf.precio);
-								dinero_por_segundo = dinero_por_segundo+edf.eProduccion;
+								dinero_total = (int) (dinero_total- edf.getPrecio());
+								dinero_por_segundo = dinero_por_segundo+(int)edf.geteProduccion();
 								liste.clearSelection();
 							}
 				else {

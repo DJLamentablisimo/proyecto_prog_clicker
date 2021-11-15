@@ -1,4 +1,4 @@
-package proyecto_rog_clicker;
+package clases;
 
 public class ElementoJuego {
 	protected long precio;
