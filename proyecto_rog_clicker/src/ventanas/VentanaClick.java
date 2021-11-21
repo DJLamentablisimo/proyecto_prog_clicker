@@ -64,10 +64,6 @@ public class VentanaClick extends JFrame {
 	private JLabel blanco1;
 
 	
-	/*static long dinero_total = 100;
-	static int dinero_por_segundo=1;  //Esta puesto a cero porque parte sin producción
-	static int dinero_click=1;*/
-	
 	private JPanel panelProduccion;
 	
 	public VentanaClick() {
@@ -174,7 +170,8 @@ public class VentanaClick extends JFrame {
 		JMenuItem menuitem2 = new JMenuItem("Reiniciar partida");
 		JMenuItem menuitem3 = new JMenuItem("Estadisticas del jugador");
 		JMenuItem menuitem4 = new JMenuItem("Guardar progreso");
-		JMenuItem menuitem5 = new JMenuItem("Salir");
+		JMenuItem menuitem5 = new JMenuItem("Cambiar usuario");
+		JMenuItem menuitem6 = new JMenuItem("Salir");
 		
 		menub.add(menu);
 		menu.add(menuitem1);
@@ -182,6 +179,7 @@ public class VentanaClick extends JFrame {
 		menu.add(menuitem3);
 		menu.add(menuitem4);
 		menu.add(menuitem5);
+		menu.add(menuitem6);
 		
 		pMenuSup.add(menub);
 		pMenuSup.add(new JLabel());
@@ -263,9 +261,16 @@ public class VentanaClick extends JFrame {
 				
 			}
 		});
-		
-		//Opcion5
 		menuitem5.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaUsuario.main(null);
+				dispose();
+			}
+		});
+		//Opcion6
+		menuitem6.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import clases.Usuario;
@@ -23,16 +23,17 @@ public class VentanaUsuario extends JFrame{
 	private JLabel lUsuario;
 	private JTextField tUsuario;
 	private JLabel lContraseña;
-	private JTextField tContraseña;
+	private JPasswordField tContraseña;
 	private JLabel olvContraseña;
 	private JButton botonIni;
 	private JPanel panel;
+	public static Usuario usuarioActual;
 	
 	public VentanaUsuario() {
 		lUsuario = new JLabel("Usuario:");
 		tUsuario = new JTextField();
 		lContraseña = new JLabel("Contraseña:");
-		tContraseña = new JTextField();
+		tContraseña = new JPasswordField();
 		olvContraseña = new JLabel("¿¿¿Has olvidado tu contraseña???");
 		botonIni = new JButton("Iniciar sesion");
 		panel = new JPanel();
@@ -46,10 +47,10 @@ public class VentanaUsuario extends JFrame{
 		panel.add(olvContraseña);
 		panel.add(botonIni);
 		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-		Usuario u1 = new Usuario("Jorge","Alonso","JorgeAlonsoSuS","pepelotas1");
-		Usuario u2 = new Usuario("David","Barrenechea","DavidBarrenechea","pepelotas2");
-		Usuario u3 = new Usuario("Daniel","Galean","DjLamentablisimo","pepelotas3");
-		Usuario u4 = new Usuario("Asier","Belloso","BellosoAsier","pepelotas4");
+		Usuario u1 = new Usuario("Jorge","Alonso","JorgeAlonsoSuS","pepelotas1",100,1,1);
+		Usuario u2 = new Usuario("David","Barrenechea","DavidBarrenechea","pepelotas2",200,2,2);
+		Usuario u3 = new Usuario("Daniel","Galean","DjLamentablisimo","pepelotas3",432,2,1);
+		Usuario u4 = new Usuario("Asier","Belloso","BellosoAsier","pepelotas4",500,1,25);
 		listaUsuarios.add(u1);
 		listaUsuarios.add(u2);
 		listaUsuarios.add(u3);
@@ -60,7 +61,10 @@ public class VentanaUsuario extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for(Usuario u : listaUsuarios) {
-					if(u.getnUsuario().equals(tUsuario.getText()) && u.getContraseña().equals(tContraseña.getText())) {
+					String valorPass = new String(tContraseña.getPassword());
+					if(u.getnUsuario().equals(tUsuario.getText()) && u.getContraseña().equals(valorPass)) {
+						System.out.println(u);
+						usuarioActual = u;
 						System.out.println("Buenos dias Sr." + u.getnUsuario());
 						VentanaClick.main(null);
 						dispose();
