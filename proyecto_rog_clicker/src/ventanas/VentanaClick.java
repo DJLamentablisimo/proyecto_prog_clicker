@@ -47,7 +47,7 @@ public class VentanaClick extends JFrame {
 	private JPanel superior;
 	private JPanel inferior;
 
-	static int cooldown;
+	
 
 	private JPanel pMenuSup;
 	private HiloDineroPorSegundo hilo;
@@ -64,9 +64,9 @@ public class VentanaClick extends JFrame {
 	private JLabel blanco1;
 
 	
-	static long dinero_total = 100;
+	/*static long dinero_total = 100;
 	static int dinero_por_segundo=1;  //Esta puesto a cero porque parte sin producción
-	static int dinero_click=1;
+	static int dinero_click=1;*/
 	
 	private JPanel panelProduccion;
 	
@@ -95,7 +95,7 @@ public class VentanaClick extends JFrame {
 		anyadirEdificios("Edificio17", 500000, 0, 17, "", listaEdifs);	
 		
 		//Creación de apuestas
-		Apuestas apuesta01= new Apuestas("Préstamo inestable",99, Double.valueOf(dinero_total*0.05).longValue(), "" );
+		Apuestas apuesta01= new Apuestas("Préstamo inestable",99, Double.valueOf(ClaseContenedora.dinero_total*0.05).longValue(), "" );
 		
 		//Creación de componentes de la ventana
 		liste = new JList<>();
@@ -136,11 +136,11 @@ public class VentanaClick extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(dinero_total>=100) {
-					dinero_total-=apuesta01.getPrecio();
-					dinero_total=apuesta01.efecto(apuesta01.getAincremento(),dinero_total);
+				if(ClaseContenedora.dinero_total>=100) {
+					ClaseContenedora.dinero_total-=apuesta01.getPrecio();
+					ClaseContenedora.dinero_total=apuesta01.efecto(apuesta01.getAincremento(),ClaseContenedora.dinero_total);
 					
-					puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+					puntuacion.setText("Ca$h Money Baby: "+String.valueOf(ClaseContenedora.dinero_total));
 					logger.info("La apuesta 1 tiene efecto");
 				}
 			}
@@ -157,9 +157,9 @@ public class VentanaClick extends JFrame {
 		blanco = new JLabel();
 		alternativa = new JLabel();
 		
-		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_total));
+		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(ClaseContenedora.dinero_total));
 		puntuacion.setFont(new Font("Castellar", Font.BOLD, 20));
-		produccion = new JLabel("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
+		produccion = new JLabel("Producción por segundo: "+String.valueOf(ClaseContenedora.dinero_por_segundo)+" $/seg");
 		produccion.setFont(new Font("Castellar", Font.ITALIC, 11));
 		panelProduccion.add(puntuacion);
 		panelProduccion.add(produccion);
@@ -208,10 +208,10 @@ public class VentanaClick extends JFrame {
 					if(liste.getSelectedValue()!=null) {
 						if(!e.getValueIsAdjusting()) {
 							Edificios edf = (Edificios) liste.getSelectedValue();
-							if(dinero_total >= edf.getPrecio()) {
+							if(ClaseContenedora.dinero_total >= edf.getPrecio()) {
 								edf.seteCantidad(edf.incrementar(1));
-								dinero_total = (int) (dinero_total- edf.getPrecio());
-								dinero_por_segundo = dinero_por_segundo+(int)edf.geteProduccion();
+								ClaseContenedora.dinero_total = (int) (ClaseContenedora.dinero_total- edf.getPrecio());
+								ClaseContenedora.dinero_por_segundo = ClaseContenedora.dinero_por_segundo+(int)edf.geteProduccion();
 								liste.clearSelection();
 							}
 				else {
@@ -244,9 +244,9 @@ public class VentanaClick extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres reiniciar la partida y perder todo tu progreso?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(opcion==0) {
-					dinero_total = 0;
-					dinero_por_segundo=0; 
-					dinero_click=1;
+					ClaseContenedora.dinero_total = 0;
+					ClaseContenedora.dinero_por_segundo=0; 
+					ClaseContenedora.dinero_click=1;
 				}if(opcion==1) {
 				}
 			}
@@ -287,9 +287,9 @@ public class VentanaClick extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				dinero_total=dinero_total+1*dinero_click;
+				ClaseContenedora.dinero_total=ClaseContenedora.dinero_total+1*ClaseContenedora.dinero_por_segundo;
 				logger.info("click");
-				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(ClaseContenedora.dinero_total));
 				
 			}
 		});
@@ -372,10 +372,10 @@ public class VentanaClick extends JFrame {
 					try {
 						while (true){	
 						Thread.sleep(1000);
-						dinero_total = dinero_total+dinero_por_segundo;
-						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
-						produccion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
-						if(dinero_total>100) {
+						ClaseContenedora.dinero_total = ClaseContenedora.dinero_total+ClaseContenedora.dinero_por_segundo;
+						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(ClaseContenedora.dinero_total));
+						produccion.setText("Producción por segundo: "+String.valueOf(ClaseContenedora.dinero_por_segundo)+" $/seg");
+						if(ClaseContenedora.dinero_total>100) {
 						
 						}
 					} 

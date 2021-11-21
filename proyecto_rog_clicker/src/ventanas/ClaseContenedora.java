@@ -6,7 +6,10 @@ import clases.Usuario;
 
 public class ClaseContenedora {
 
-	
+	static int cooldown;
+	static int dinero_click=1;
+	static int dinero_por_segundo=1;
+	static long dinero_total = 100;
 	
 	
 	public static void main(String[] args) {
