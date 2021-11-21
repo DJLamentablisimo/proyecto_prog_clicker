@@ -1,5 +1,10 @@
 package ventanas;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import clases.Usuario;
@@ -23,6 +28,26 @@ public class ClaseContenedora {
 		listaUsuarios.add(u2);
 		listaUsuarios.add(u3);
 		listaUsuarios.add(u4);
+		
+		guardarDB(1, 10, 10000, "Justy", "root", 3600);
+		
+	}
+	
+	private static void guardarDB(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			String sql = String.format("INSERT INTO usuario VALUES ('%s', %d, %d, '%s', %d, %d)", usuario, dinero_total, dinero_click, contraseña, dinero_segundo, cooldown);
+			stmt.executeUpdate(sql);
+			stmt.close();
+			Statement stmt2 = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+			stmt2.close();
+			rs.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
 		
 	}
 }

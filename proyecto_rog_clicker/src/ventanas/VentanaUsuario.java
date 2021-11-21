@@ -61,7 +61,7 @@ public class VentanaUsuario extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				for(Usuario u : listaUsuarios) {
 					if(u.getnUsuario().equals(tUsuario.getText()) && u.getContraseña().equals(tContraseña.getText())) {
-						System.out.println("Buenos dias Sr." + u.getApellido()+", "+ u.getNombre());
+						System.out.println("Buenos dias Sr." + u.getnUsuario());
 						VentanaClick.main(null);
 						dispose();
 					}else {
