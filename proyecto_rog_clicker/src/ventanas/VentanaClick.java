@@ -245,6 +245,7 @@ public class VentanaClick extends JFrame {
 					ClaseContenedora.dinero_total = 0;
 					ClaseContenedora.dinero_por_segundo=0; 
 					ClaseContenedora.dinero_click=1;
+				//Error
 				}if(opcion==1) {
 				}
 			}
