@@ -61,8 +61,9 @@ public class VentanaClick extends JFrame {
 	
 	private JPanel pApuestas;
 	private JLabel apuesta1;
+	private JLabel apuesta2;
 	private JLabel blanco1;
-
+	private JLabel blanco2;
 	
 	private JPanel panelProduccion;
 	
@@ -91,7 +92,11 @@ public class VentanaClick extends JFrame {
 		anyadirEdificios("Edificio17", 500000, 0, 17, "", listaEdifs);	
 		
 		//Creación de apuestas
-		Apuestas apuesta01= new Apuestas("Préstamo inestable",99, Double.valueOf(ClaseContenedora.dinero_total*0.05).longValue(), "" );
+		
+			//Te suma o resta cantidad de dinero
+			Apuestas apuesta01= new Apuestas("Préstamo inestable",99, Double.valueOf(ClaseContenedora.dinero_total*0.05).longValue(), "" );
+			//Te da o te quita x7 potencia de clicks
+			Apuestas apuesta02= new Apuestas("El ratoncito loco",100, Double.valueOf(ClaseContenedora.dinero_click*7).longValue(), "" );
 		
 		//Creación de componentes de la ventana
 		liste = new JList<>();
@@ -112,6 +117,8 @@ public class VentanaClick extends JFrame {
 		bJuegoExtra=new JButton("Juego extra");
 		bJuegoExtra.setBackground(Color.black);
 		bJuegoExtra.setForeground(Color.white);
+		
+		
 		
 		apuesta1=new JLabel(apuesta01.getNombre());
 		apuesta1.setBackground(Color.BLUE);
@@ -145,7 +152,44 @@ public class VentanaClick extends JFrame {
 		pApuestas.setLayout(new GridLayout(5, 2));
 		pApuestas.add(apuesta1);
 		pApuestas.add(blanco1);
-		anyadirApuestas("Apuesta2", true, Color.red, pApuestas, "derecha");
+		
+		
+		
+		
+		apuesta2=new JLabel(apuesta02.getNombre());
+		apuesta2.setBackground(Color.RED);
+		apuesta2.setOpaque(true);
+		apuesta2.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				logger.info(String.valueOf(apuesta02.getPrecio()));
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(ClaseContenedora.dinero_total>=apuesta02.getPrecio()) {
+					ClaseContenedora.dinero_total-=apuesta02.getPrecio();
+					ClaseContenedora.dinero_click=(int) apuesta02.efecto(apuesta02.getAincremento(),ClaseContenedora.dinero_click);
+					
+					logger.info("La apuesta 2 tiene efecto");
+				}
+			}
+		});
+		
+		
+		blanco2=new JLabel();
+		pApuestas.add(blanco2);
+		pApuestas.add(apuesta2);
+		
+		
 		anyadirApuestas("Apuesta3", true, Color.green, pApuestas, "izquierda");
 		anyadirApuestas("Apuesta4", true, Color.gray, pApuestas, "derecha");
 		anyadirApuestas("Apuesta5", true, Color.pink, pApuestas, "izquierda");

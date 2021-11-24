@@ -14,7 +14,8 @@ public class ClaseContenedora {
 	static int cooldown;
 	static int dinero_click=VentanaUsuario.usuarioActual.getDinero_click_personal();
 	static int dinero_por_segundo=VentanaUsuario.usuarioActual.getDinero_por_segundo_personal();
-	static long dinero_total = VentanaUsuario.usuarioActual.getDinero_total_personal();
+	//static long dinero_total = VentanaUsuario.usuarioActual.getDinero_total_personal();
+	static long dinero_total = 5000000;
 
 	
 	
