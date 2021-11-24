@@ -243,9 +243,10 @@ public class VentanaClick extends JFrame {
 				int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres reiniciar la partida y perder todo tu progreso?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(opcion==0) {
 					ClaseContenedora.dinero_total = 0;
-					ClaseContenedora.dinero_por_segundo=0; 
-					ClaseContenedora.dinero_click=1;
-				//Error
+					ClaseContenedora.dinero_por_segundo=1; 
+					ClaseContenedora.dinero_click=1;				
+					hilo.interrupt();
+					
 				}if(opcion==1) {
 				}
 			}
@@ -293,7 +294,7 @@ public class VentanaClick extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ClaseContenedora.dinero_total=ClaseContenedora.dinero_total+1*ClaseContenedora.dinero_por_segundo;
+				ClaseContenedora.dinero_total=ClaseContenedora.dinero_total+ClaseContenedora.dinero_click;
 				logger.info("click");
 				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(ClaseContenedora.dinero_total));
 				
@@ -381,9 +382,9 @@ public class VentanaClick extends JFrame {
 						ClaseContenedora.dinero_total = ClaseContenedora.dinero_total+ClaseContenedora.dinero_por_segundo;
 						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(ClaseContenedora.dinero_total));
 						produccion.setText("Producción por segundo: "+String.valueOf(ClaseContenedora.dinero_por_segundo)+" $/seg");
-						if(ClaseContenedora.dinero_total>100) {
+						//if(ClaseContenedora.dinero_total>100) {
 						
-						}
+						//}
 					} 
 				}
 				catch (Exception e) {
