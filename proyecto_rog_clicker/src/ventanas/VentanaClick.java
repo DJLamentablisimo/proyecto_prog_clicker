@@ -33,6 +33,7 @@ import javax.swing.event.ListSelectionListener;
 
 import clases.Apuestas;
 import clases.Edificios;
+import clases.Usuario;
 
 
 
@@ -72,28 +73,14 @@ public class VentanaClick extends JFrame {
 	private JPanel panelProduccion;
 	
 	public VentanaClick() {
+		ClaseContenedora cc = new ClaseContenedora();
+		ArrayList<Edificios> listaEdifs = cc.sacarEdificios();
 		//Creacion de Logger que utilizaremos para comentar parte del codigo y su funcionamiento.
 		Logger logger = Logger.getLogger(VentanaClick.class.getName());
 		
 		////Creación de ArrayList donde almacenaremos todos los elementos de Edificios
-		ArrayList<Edificios> listaEdifs = new ArrayList<>();
-		anyadirEdificios("Edificio1", 120, 0, 1, "", listaEdifs);
-		anyadirEdificios("Edificio2", 200, 0, 2, "", listaEdifs);
-		anyadirEdificios("Edificio3", 250, 0, 3, "", listaEdifs);
-		anyadirEdificios("Edificio4", 550, 0, 4, "", listaEdifs);
-		anyadirEdificios("Edificio5", 1000, 0, 5, "", listaEdifs);
-		anyadirEdificios("Edificio6", 2300, 0, 6, "", listaEdifs);
-		anyadirEdificios("Edificio7", 5000, 0, 7, "", listaEdifs);
-		anyadirEdificios("Edificio8", 7000, 0, 8, "", listaEdifs);
-		anyadirEdificios("Edificio9", 10000, 0, 9, "", listaEdifs);
-		anyadirEdificios("Edificio10", 20000, 0, 10, "", listaEdifs);
-		anyadirEdificios("Edificio11", 25000, 0, 11, "", listaEdifs);
-		anyadirEdificios("Edificio12", 30000, 0, 12, "", listaEdifs);
-		anyadirEdificios("Edificio13", 40000, 0, 13, "", listaEdifs);
-		anyadirEdificios("Edificio14", 50000, 0, 14, "", listaEdifs);
-		anyadirEdificios("Edificio15", 75000, 0, 15, "", listaEdifs);
-		anyadirEdificios("Edificio16", 100000, 0, 16, "", listaEdifs);
-		anyadirEdificios("Edificio17", 500000, 0, 17, "", listaEdifs);	
+		//ArrayList<Edificios> listaEdifs = new ArrayList<>();
+		
 		
 		//Creación de apuestas
 		
@@ -398,10 +385,7 @@ public class VentanaClick extends JFrame {
 		v.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 	}
-	private static void anyadirEdificios( String nombre, long precio, long cant, int prod, String image, ArrayList<Edificios> array) {
-		Edificios edif = new Edificios(nombre,precio,cant,prod,image);
-		array.add(edif);
-	}
+
 	private static void anyadirApuestas(String nombre, boolean x, Color color, JPanel panel, String lugar) {
 		JLabel vacio = new JLabel();
 		JLabel apuestita=new JLabel(nombre);

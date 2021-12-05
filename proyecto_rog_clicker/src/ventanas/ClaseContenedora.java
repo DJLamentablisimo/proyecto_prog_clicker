@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import clases.Usuario;
+import clases.Edificios;
 
 public class ClaseContenedora {
 	private static Logger logger = Logger.getLogger("ClaseContenedora");
@@ -83,6 +84,33 @@ public class ClaseContenedora {
 			return null;
 		
 	}
+	public ArrayList<Edificios> sacarEdificios(){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			ArrayList<Edificios> dev = new ArrayList<>();
+			String sql = "SELECT * FROM edificio";
+			logger.log(Level.INFO, "Statement: " + sql);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM edificio");
+			while( rs.next() ) { 
+				String nombre = rs.getString("nombre");
+				long precio = rs.getLong("precio");
+				long cant = rs.getInt("eCantidad");
+				int prod = rs.getInt("eProduccion");
+				String image = rs.getString("eImg");
+				dev.add( new Edificios( nombre, precio, cant, prod, image ) );
+			}
+			rs.close();
+			stmt.close();
+			conn.close(); 
+			return dev;
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+			return null;
+		
+	}
+	
 	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
