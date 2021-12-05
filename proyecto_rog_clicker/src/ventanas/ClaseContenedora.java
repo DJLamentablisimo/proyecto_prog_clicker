@@ -15,8 +15,6 @@ import clases.Edificios;
 public class ClaseContenedora {
 	private static Logger logger = Logger.getLogger("ClaseContenedora");
 
-	
-	
 	public static void main(String[] args) {
 		ClaseContenedora claseCont = new ClaseContenedora();
 

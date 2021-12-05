@@ -67,8 +67,10 @@ public class VentanaClick extends JFrame {
 	private JPanel pApuestas;
 	private JLabel apuesta1;
 	private JLabel apuesta2;
+	private JLabel apuesta3;
 	private JLabel blanco1;
 	private JLabel blanco2;
+	private JLabel blanco3;
 	
 	private JPanel panelProduccion;
 	
@@ -88,6 +90,10 @@ public class VentanaClick extends JFrame {
 			Apuestas apuesta01= new Apuestas("Préstamo inestable",99, Double.valueOf(dinero_total*0.05).longValue(), "" );
 			//Te da o te quita x7 potencia de clicks
 			Apuestas apuesta02= new Apuestas("El ratoncito loco",100, Double.valueOf(dinero_click*7).longValue(), "" );
+			//Te aumenta o te reduce el dinero que ganas por segundo
+			Apuestas apuesta03= new Apuestas("Inversión en NFTs",450, Double.valueOf(dinero_por_segundo*0.5).longValue(), "" );
+			
+			
 		
 		//Creación de componentes de la ventana
 		liste = new JList<>();
@@ -181,7 +187,44 @@ public class VentanaClick extends JFrame {
 		pApuestas.add(apuesta2);
 		
 		
-		anyadirApuestas("Apuesta3", true, Color.green, pApuestas, "izquierda");
+		
+		
+		apuesta3=new JLabel(apuesta03.getNombre());
+		apuesta3.setBackground(Color.GREEN);
+		apuesta3.setOpaque(true);
+		apuesta3.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				logger.info(String.valueOf(apuesta03.getPrecio()));
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(dinero_total>=apuesta03.getPrecio()) {
+					dinero_total-=apuesta03.getPrecio();
+					dinero_por_segundo=(int) apuesta03.efecto(apuesta03.getAincremento(),dinero_por_segundo);
+					
+					produccion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
+					
+					logger.info("La apuesta 3 tiene efecto");
+				}
+			}
+		});
+		
+		
+		blanco3=new JLabel();
+		pApuestas.add(apuesta3);
+		pApuestas.add(blanco3);
+		
+		
 		anyadirApuestas("Apuesta4", true, Color.gray, pApuestas, "derecha");
 		anyadirApuestas("Apuesta5", true, Color.pink, pApuestas, "izquierda");
 
