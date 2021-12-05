@@ -8,9 +8,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import clases.Usuario;
 import clases.Edificios;
+import org.json.simple.JSONObject;    
+
+
 
 public class ClaseContenedora {
 	private static Logger logger = Logger.getLogger("ClaseContenedora");
@@ -109,8 +111,9 @@ public class ClaseContenedora {
 		
 	}
 	
-	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
+	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown, ArrayList<Edificios> lista){
 		try {
+			
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO usuario VALUES ('%s', %d, %d, '%s', %d, %d)", usuario, dinero_total, dinero_click, contraseña, dinero_segundo, cooldown);
@@ -227,6 +230,8 @@ public class ClaseContenedora {
 			} catch (SQLException e) {
 			System.out.println("No se ha podido cargar el driver de la base de datos");
 			}
+		
+
 		
 	}
 }

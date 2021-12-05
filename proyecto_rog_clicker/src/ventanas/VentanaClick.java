@@ -59,9 +59,11 @@ public class VentanaClick extends JFrame {
 
 
 	private JList<Edificios> liste;
+	private ArrayList<Edificios> listaEdifs;
 	
 	private JScrollPane sPanel;
-	private JScrollPane pMejoras;
+	private JScrollPane pMejorasScroll;
+	private JPanel pMejoras;
 	private JButton bJuegoExtra;
 	
 	private JPanel pApuestas;
@@ -109,7 +111,7 @@ public class VentanaClick extends JFrame {
 		pMenuSup.setLayout(new GridLayout(1,4));
 		inferior = new JPanel();
 		inferior.setLayout(new GridLayout(1,3));
-		pMejoras = new JScrollPane();
+		pMejorasScroll = new JScrollPane();
 		pApuestas = new JPanel();
 		bJuegoExtra=new JButton("Juego extra");
 		bJuegoExtra.setBackground(Color.black);
@@ -382,7 +384,7 @@ public class VentanaClick extends JFrame {
 		//Añadir todos los paneles a la Ventana
 		inferior.add(pApuestas, BorderLayout.WEST);
 		inferior.add(sPanel, BorderLayout.CENTER);
-		inferior.add(pMejoras, BorderLayout.EAST);
+		inferior.add(pMejorasScroll, BorderLayout.EAST);
 		
 		
 /*
@@ -443,7 +445,7 @@ public class VentanaClick extends JFrame {
 			panel.add(apuestita);
 		}
 		
-		
+	
 	}
 
 	
@@ -453,13 +455,14 @@ public class VentanaClick extends JFrame {
 
 					try {
 						while (true){	
+						VentanaClick v= new VentanaClick();
 						Thread.sleep(1000);
 						dinero_total = dinero_total+dinero_por_segundo;
 						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+						//for(int i=0; i=v.listaEdifs.; i++)
+						//dinero_por_segundo=liste
 						produccion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
-						//if(ClaseContenedora.dinero_total>100) {
 						
-						//}
 					} 
 				}
 				catch (Exception e) {
