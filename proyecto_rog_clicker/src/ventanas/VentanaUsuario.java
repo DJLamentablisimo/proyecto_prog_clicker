@@ -47,14 +47,8 @@ public class VentanaUsuario extends JFrame{
 		panel.add(olvContraseña);
 		panel.add(botonIni);
 		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
-		Usuario u1 = new Usuario("Jorge","Alonso","JorgeAlonsoSuS","pepelotas1",100,1,1);
-		Usuario u2 = new Usuario("David","Barrenechea","DavidBarrenechea","pepelotas2",200,2,2);
-		Usuario u3 = new Usuario("Daniel","Galean","DJLamentablisimo","pepelotas3",432,2,1);
-		Usuario u4 = new Usuario("Asier","Belloso","BellosoAsier","pepelotas4",500,1,25);
-		listaUsuarios.add(u1);
-		listaUsuarios.add(u2);
-		listaUsuarios.add(u3);
-		listaUsuarios.add(u4);
+		
+		
 		
 		botonIni.addActionListener(new ActionListener() {
 			

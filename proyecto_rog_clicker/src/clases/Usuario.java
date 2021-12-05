@@ -13,7 +13,7 @@ public class Usuario implements Serializable{
 	long dinero_total_personal;
 	int dinero_por_segundo_personal;  
 	int dinero_click_personal;
-	public Usuario(String nombre, String apellido, String nUsuario, String contraseña, long dtp, int dpsp, int dcp) {
+	public Usuario(String nUsuario, String contraseña, long dtp, int dpsp, int dcp) {
 		super();
 		this.nUsuario = nUsuario;
 		this.contraseña = contraseña;
