@@ -70,11 +70,15 @@ public class VentanaClick extends JFrame {
 	private JLabel apuesta1;
 	private JLabel apuesta2;
 	private JLabel apuesta3;
+	private JLabel apuesta4;
 	private JLabel blanco1;
 	private JLabel blanco2;
 	private JLabel blanco3;
+	private JLabel blanco4;
 	
 	private JPanel panelProduccion;
+	
+	private static VentanaClick ventana;
 	
 	public VentanaClick() {
 		ClaseContenedora cc = new ClaseContenedora();
@@ -94,6 +98,8 @@ public class VentanaClick extends JFrame {
 			Apuestas apuesta02= new Apuestas("El ratoncito loco",100, Double.valueOf(dinero_click*7).longValue(), "" );
 			//Te aumenta o te reduce el dinero que ganas por segundo
 			Apuestas apuesta03= new Apuestas("Inversión en NFTs",450, Double.valueOf(dinero_por_segundo*0.5).longValue(), "" );
+			//Eliges la cantidad de capital a apostar, pudiendo ganar un 15% extra de ese dinero o perderlo todo en el proceso
+			Apuestas apuesta04 = new Apuestas("A ver si hay huevos", 0, Double.valueOf(dinero_total).longValue(),"");
 			
 			
 		
@@ -227,7 +233,37 @@ public class VentanaClick extends JFrame {
 		pApuestas.add(blanco3);
 		
 		
-		anyadirApuestas("Apuesta4", true, Color.gray, pApuestas, "derecha");
+		apuesta4=new JLabel(apuesta04.getNombre());
+		apuesta4.setBackground(Color.GRAY);
+		apuesta4.setOpaque(true);
+		apuesta4.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {			
+				dinero_total-=apuesta04.getPrecio();
+				String opcion = JOptionPane.showInputDialog(ventana, "Cantidad a apostar", "");	
+				int opcionInt =  Integer.parseInt(opcion);
+				int valorRNG = (int) Math.floor(Math.random()*2);
+				if (valorRNG==0) {
+					dinero_total += opcionInt*0.3;
+				}
+				if (valorRNG ==1) {
+					dinero_total -= opcionInt;
+				}
+					
+				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+				logger.info("La apuesta 4 tiene efecto");
+			}
+		});
+		
+		
+		blanco4=new JLabel();
+		pApuestas.add(blanco4);
+		pApuestas.add(apuesta4);
+		
+		
+		
+		
 		anyadirApuestas("Apuesta5", true, Color.pink, pApuestas, "izquierda");
 
 		blanco = new JLabel();
@@ -455,7 +491,7 @@ public class VentanaClick extends JFrame {
 
 					try {
 						while (true){	
-						VentanaClick v= new VentanaClick();
+						//VentanaClick v= new VentanaClick();
 						Thread.sleep(1000);
 						dinero_total = dinero_total+dinero_por_segundo;
 						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
