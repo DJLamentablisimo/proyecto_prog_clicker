@@ -59,6 +59,10 @@ public class ClaseContenedora {
 		claseCont.guardarDBEdificio("Edificio17", 500000, 0, 17, "");
 		*/
 		//System.out.println(claseCont.sacarUsuarios());
+		/*claseCont.guardarMejoras(200, "Mejora de Produccion", 2, "");
+		claseCont.guardarMejoras(200, "Mejora de Clicks", 2, "");
+		claseCont.guardarMejoras(200, "Mejora de ProduccionEdificios", 2, "");
+		*/
 	}
 	public ArrayList<Usuario> sacarUsuarios(){
 		try {
