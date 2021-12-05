@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -12,6 +13,9 @@ import java.awt.event.MouseEvent;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -71,10 +75,12 @@ public class VentanaClick extends JFrame {
 	private JLabel apuesta2;
 	private JLabel apuesta3;
 	private JLabel apuesta4;
+	private JLabel apuesta5;
 	private JLabel blanco1;
 	private JLabel blanco2;
 	private JLabel blanco3;
 	private JLabel blanco4;
+	private JLabel blanco5;
 	
 	private JPanel panelProduccion;
 	
@@ -264,8 +270,26 @@ public class VentanaClick extends JFrame {
 		
 		
 		
-		anyadirApuestas("Apuesta5", true, Color.pink, pApuestas, "izquierda");
+		apuesta5=new JLabel("Apuesta maligna");
+		apuesta5.setBackground(Color.PINK);
+		apuesta5.setOpaque(true);
+		apuesta5.addMouseListener(new MouseAdapter() {
 
+			@Override
+			public void mouseClicked(MouseEvent e) {			
+				abrirNavegador(null);
+				logger.info("La apuesta 5 tiene efecto");
+			}
+		});
+		
+		blanco5=new JLabel();
+		pApuestas.add(apuesta5);
+		pApuestas.add(blanco5);
+		
+		
+		
+		
+		
 		blanco = new JLabel();
 		alternativa = new JLabel();
 		
@@ -484,6 +508,19 @@ public class VentanaClick extends JFrame {
 	
 	}
 
+	private void abrirNavegador(java.awt.event.ActionEvent evt) {                                         
+        try {
+            Desktop.getDesktop().browse(new URI("https://youtu.be/dQw4w9WgXcQ"));
+
+        } catch (URISyntaxException ex) {
+            System.out.println(ex);
+
+        }catch(IOException e){
+            System.out.println(e);
+
+        }
+      
+ }         
 	
 	static class HiloDineroPorSegundo extends Thread{
 		@Override
