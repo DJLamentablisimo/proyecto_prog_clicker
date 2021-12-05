@@ -19,6 +19,8 @@ public class ClaseContenedora {
 
 	public static void main(String[] args) {
 		ClaseContenedora claseCont = new ClaseContenedora();
+		
+		
 
 		/*claseCont.guardarDBUsuario(1, 1, 100, "JorgeAlonsoSuS", "pepelotas1", 3200);
 		claseCont.guardarDBUsuario(2, 2, 200, "DavidBarrenechea", "pepelotas2", 3200);
