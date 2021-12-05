@@ -30,6 +30,7 @@ public class VentanaUsuario extends JFrame{
 	public static Usuario usuarioActual;
 	
 	public VentanaUsuario() {
+		ClaseContenedora cc = new ClaseContenedora();
 		lUsuario = new JLabel("Usuario:");
 		tUsuario = new JTextField();
 		lContraseña = new JLabel("Contraseña:");
@@ -46,7 +47,7 @@ public class VentanaUsuario extends JFrame{
 		panel.add(tContraseña);
 		panel.add(olvContraseña);
 		panel.add(botonIni);
-		ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+		ArrayList<Usuario> listaUsuarios = cc.sacarUsuarios();
 		
 		
 		

@@ -14,11 +14,7 @@ import clases.Usuario;
 public class ClaseContenedora {
 	private static Logger logger = Logger.getLogger("ClaseContenedora");
 
-	static int cooldown;
-	static int dinero_click=VentanaUsuario.usuarioActual.getDinero_click_personal();
-	static int dinero_por_segundo=VentanaUsuario.usuarioActual.getDinero_por_segundo_personal();
-	//static long dinero_total = VentanaUsuario.usuarioActual.getDinero_total_personal();
-	static long dinero_total = 5000000;
+	
 	
 	public static void main(String[] args) {
 		ClaseContenedora claseCont = new ClaseContenedora();
@@ -41,7 +37,7 @@ public class ClaseContenedora {
 		*/
 		System.out.println(claseCont.sacarUsuarios());
 	}
-	private ArrayList<Usuario> sacarUsuarios(){
+	public ArrayList<Usuario> sacarUsuarios(){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
@@ -67,7 +63,7 @@ public class ClaseContenedora {
 			return null;
 		
 	}
-	private void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
+	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
@@ -84,7 +80,7 @@ public class ClaseContenedora {
 			}
 		
 	}
-	private void borrarDBUsuario(String usuario){
+	public void borrarDBUsuario(String usuario){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
@@ -118,7 +114,7 @@ public class ClaseContenedora {
 			}
 		
 	}
-	private void guardarDBEdificio(String nombre, long precio, long cant, int prod, String image ){
+	public void guardarDBEdificio(String nombre, long precio, long cant, int prod, String image ){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
@@ -135,7 +131,7 @@ public class ClaseContenedora {
 			}
 		
 	}
-	private void borrarDBEdificio(String nombre){
+	public void borrarDBEdificio(String nombre){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
