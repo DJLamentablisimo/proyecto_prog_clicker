@@ -88,13 +88,11 @@ public class VentanaClick extends JFrame {
 	
 	public VentanaClick() {
 		ClaseContenedora cc = new ClaseContenedora();
+		
+		//Creación de ArrayList donde almacenaremos todos los elementos de Edificios
 		ArrayList<Edificios> listaEdifs = cc.sacarEdificios();
 		//Creacion de Logger que utilizaremos para comentar parte del codigo y su funcionamiento.
 		Logger logger = Logger.getLogger(VentanaClick.class.getName());
-		
-		////Creación de ArrayList donde almacenaremos todos los elementos de Edificios
-		//ArrayList<Edificios> listaEdifs = new ArrayList<>();
-		
 		
 		//Creación de apuestas
 		
@@ -285,7 +283,6 @@ public class VentanaClick extends JFrame {
 		blanco5=new JLabel();
 		pApuestas.add(apuesta5);
 		pApuestas.add(blanco5);
-		
 		
 		
 		
