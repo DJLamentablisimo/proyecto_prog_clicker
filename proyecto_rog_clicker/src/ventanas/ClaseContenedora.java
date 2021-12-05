@@ -35,6 +35,26 @@ public class ClaseContenedora {
 		*/
 		/*claseCont.borrarDBEdificio("Edificio7");
 		*/
+		//claseCont.guardarMejoras(2, "Odisea",  10, "kaka/img");	
+		//claseCont.borrarMejoras("Odisea");
+		/*claseCont.guardarDBEdificio("Edificio1", 120, 0, 1, "");
+		claseCont.guardarDBEdificio("Edificio2", 200, 0, 2, "");
+		claseCont.guardarDBEdificio("Edificio3", 250, 0, 3, "");
+		claseCont.guardarDBEdificio("Edificio4", 550, 0, 4, "");
+		claseCont.guardarDBEdificio("Edificio5", 1000, 0, 5, "");
+		claseCont.guardarDBEdificio("Edificio6", 2300, 0, 6, "");
+		claseCont.guardarDBEdificio("Edificio7", 5000, 0, 7, "");
+		claseCont.guardarDBEdificio("Edificio8", 7000, 0, 8, "");
+		claseCont.guardarDBEdificio("Edificio9", 10000, 0, 9, "");
+		claseCont.guardarDBEdificio("Edificio10", 20000, 0, 10, "");
+		claseCont.guardarDBEdificio("Edificio11", 25000, 0, 11, "");
+		claseCont.guardarDBEdificio("Edificio12", 30000, 0, 12, "");
+		claseCont.guardarDBEdificio("Edificio13", 40000, 0, 13, "");
+		claseCont.guardarDBEdificio("Edificio14", 50000, 0, 14, "");
+		claseCont.guardarDBEdificio("Edificio15", 75000, 0, 15, "");
+		claseCont.guardarDBEdificio("Edificio16", 100000, 0, 16, "");
+		claseCont.guardarDBEdificio("Edificio17", 500000, 0, 17, "");
+		*/
 		System.out.println(claseCont.sacarUsuarios());
 	}
 	public ArrayList<Usuario> sacarUsuarios(){
@@ -140,6 +160,41 @@ public class ClaseContenedora {
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM edificio");
+			stmt2.close();
+			rs.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+		
+	}
+	public void guardarMejoras( long precio, String nombre, long incremento, String img){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			String sql = String.format("INSERT INTO mejoras VALUES ( %d,'%s', %d, '%s')", precio, nombre, incremento, img);
+			stmt.executeUpdate(sql);
+			stmt.close();
+			Statement stmt2 = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM mejoras");
+			stmt2.close();
+			rs.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+		
+	}
+	
+	public void borrarMejoras(String nombre){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			String sql = String.format("DELETE FROM mejoras where nombre = '"+ nombre+"';");
+			stmt.executeUpdate(sql);
+			stmt.close();
+			Statement stmt2 = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM mejoras");
 			stmt2.close();
 			rs.close();
 			conn.close(); 
