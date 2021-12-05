@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -32,12 +34,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import clases.Apuestas;
 import clases.Edificios;
 import clases.Usuario;
+import ventanas.VentanaClick.MyCellRenderer;
 
 
 
@@ -335,6 +339,9 @@ public class VentanaClick extends JFrame {
 		}
 		liste.setModel(dlist);
 		
+		// se establece el renderer para los elementos de la lista
+        liste.setCellRenderer(new MyCellRenderer());
+        
 		liste.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -541,4 +548,57 @@ public class VentanaClick extends JFrame {
 			}
 		}
 	}
+	// este modelo de lista proporciona un método
+    // addAll para añadir una lista de personas directamente
+    // DefaultListModel no contiene este método en Java 8
+    class MyListModel extends DefaultListModel<Edificios> {
+
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
+        public MyListModel(Collection<Edificios> edif) {
+            add(edif);
+        }
+
+        public void add(Collection<Edificios> edif) {
+            for (Edificios e : edif) {
+                addElement(e);
+            }
+        }
+
+    }
+	// Esta clase define el renderer para los elementos visuales de la tabla
+    // El renderer debe implementar la interfaz ListCellRender.
+    // En este caso se extiende un JLabel como componente a visualizar
+    class MyCellRenderer extends JLabel implements ListCellRenderer<Edificios> {
+
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+        private ImageIcon icono;
+
+        // constructor del renderer que carga los iconos a utilizar
+        public MyCellRenderer() {
+            icono = new ImageIcon(getClass().getResource("bank_PNG28.png"));
+
+        }
+
+        // este es el método que se llama para obtener el componente
+        // que se debe pintar en cada elemento de la lista
+        public Component getListCellRendererComponent(JList<? extends Edificios> list, Edificios value, int index,
+                boolean isSelected, boolean hasFocus) {
+            // se establece el valor del texto mostrado en el JLabel de la celda
+        	setText(value.toString());
+        	setFont(new Font("Arial", Font.ITALIC, 27));
+            setIcon(icono);
+            // se devuelve el componente visual. siempre se devuelve this
+            // porque se evita crear uno nuevo para cada elemento de la lista
+            return this;
+        }
+
+    }
+
 }
