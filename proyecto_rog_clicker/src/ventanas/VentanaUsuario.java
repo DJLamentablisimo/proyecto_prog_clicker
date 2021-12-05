@@ -5,10 +5,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -19,12 +21,13 @@ public class VentanaUsuario extends JFrame{
 	/**
 	 * 
 	 */
+	private static Logger logger = Logger.getLogger("ClaseContenedora");
 	private static final long serialVersionUID = 4153408173306883007L;
 	private JLabel lUsuario;
 	private JTextField tUsuario;
 	private JLabel lContraseña;
 	private JPasswordField tContraseña;
-	private JLabel olvContraseña;
+	private JButton newUsuario;
 	private JButton botonIni;
 	private JPanel panel;
 	public static Usuario usuarioActual;
@@ -35,7 +38,7 @@ public class VentanaUsuario extends JFrame{
 		tUsuario = new JTextField();
 		lContraseña = new JLabel("Contraseña:");
 		tContraseña = new JPasswordField();
-		olvContraseña = new JLabel("¿¿¿Has olvidado tu contraseña???");
+		newUsuario = new JButton("¿Crear nuevo Usuario");
 		botonIni = new JButton("Iniciar sesion");
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(4,2));
@@ -45,7 +48,7 @@ public class VentanaUsuario extends JFrame{
 		panel.add(tUsuario);
 		panel.add(lContraseña);
 		panel.add(tContraseña);
-		panel.add(olvContraseña);
+		panel.add(newUsuario);
 		panel.add(botonIni);
 		ArrayList<Usuario> listaUsuarios = cc.sacarUsuarios();
 		
@@ -69,6 +72,33 @@ public class VentanaUsuario extends JFrame{
 				
 			}
 		});
+		newUsuario.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String valorPass = new String(tContraseña.getPassword());
+				ArrayList<String> noms = new ArrayList<>();
+				for(Usuario u : listaUsuarios) {
+					noms.add(u.getnUsuario());
+				}
+				if(tUsuario.getText().isBlank() || valorPass.isBlank()) {
+					JOptionPane.showMessageDialog(null, "Por favor ponga el nombre de usuario que desea crear y/o su contraseña", "Crear usuario nuevo - Error", JOptionPane.INFORMATION_MESSAGE);
+				}else if(noms.contains(tUsuario.getText())) {
+					JOptionPane.showMessageDialog(null, "Este usuario ya existe", "Crear usuario nuevo - Error", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres crear un usuario con nombre: "+tUsuario.getText()+ " y contraseña: "+valorPass+"?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if(opcion==0) {
+						cc.guardarDBUsuario(1, 1, 0, tUsuario.getText(), valorPass, 3200);
+						dispose();
+						VentanaInicial.main(null);
+					}if(opcion==1) {
+						
+					}
+				}
+				
+				
+			}
+		});
 		
 		add(panel, BorderLayout.CENTER);
 	}
@@ -76,6 +106,7 @@ public class VentanaUsuario extends JFrame{
 		System.out.println("Empece");
 		VentanaUsuario v = new VentanaUsuario();
 		v.setSize(600, 200);
+		v.setLocation(550, 300);
 		v.setVisible(true);
 		v.setTitle("Business Go Boom");
 		v.setMinimumSize(v.getSize());

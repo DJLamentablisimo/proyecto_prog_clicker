@@ -58,7 +58,7 @@ public class ClaseContenedora {
 		claseCont.guardarDBEdificio("Edificio16", 100000, 0, 16, "");
 		claseCont.guardarDBEdificio("Edificio17", 500000, 0, 17, "");
 		*/
-		System.out.println(claseCont.sacarUsuarios());
+		//System.out.println(claseCont.sacarUsuarios());
 	}
 	public ArrayList<Usuario> sacarUsuarios(){
 		try {
@@ -113,7 +113,7 @@ public class ClaseContenedora {
 		
 	}
 	
-	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown, ArrayList<Edificios> lista){
+	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
 		try {
 			
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
