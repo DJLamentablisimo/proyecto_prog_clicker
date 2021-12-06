@@ -112,16 +112,16 @@ public class ClaseContenedora {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			ArrayList<Edificios> dev = new ArrayList<>();
-			String sql = "SELECT * FROM edificio";
+			String sql = "SELECT * FROM edificios";
 			logger.log(Level.INFO, "Statement: " + sql);
-			ResultSet rs = stmt.executeQuery("SELECT * FROM edificio");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM edificios");
 			while( rs.next() ) { 
 				String nombre = rs.getString("nombre");
 				long precio = rs.getLong("precio");
 				long cant = rs.getInt("eCantidad");
 				int prod = rs.getInt("eProduccion");
-				String image = rs.getString("eImg");
-				dev.add( new Edificios( nombre, precio, cant, prod, image ) );
+
+				dev.add( new Edificios( nombre, precio, cant, prod, "") );
 			}
 			rs.close();
 			stmt.close();
@@ -190,11 +190,11 @@ public class ClaseContenedora {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
-			String sql = String.format("INSERT INTO edificio VALUES ('%s', %d, %d, %d, '%s')", nombre, precio, cant, prod, image);
+			String sql = String.format("INSERT INTO edificios VALUES ('%s', %d, %d, %d, '%s')", nombre, precio, cant, prod, image);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM edificio");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM edificios");
 			stmt2.close();
 			rs.close();
 			conn.close(); 
@@ -207,11 +207,11 @@ public class ClaseContenedora {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
-			String sql = String.format("DELETE FROM edificio where nombre = '"+ nombre+"';");
+			String sql = String.format("DELETE FROM edificios where nombre = '"+ nombre+"';");
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM edificio");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM edificios");
 			stmt2.close();
 			rs.close();
 			conn.close(); 
