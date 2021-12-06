@@ -17,53 +17,9 @@ import org.json.simple.JSONObject;
 public class ClaseContenedora {
 	private static Logger logger = Logger.getLogger("ClaseContenedora");
 
-	public static void main(String[] args) {
-		ClaseContenedora claseCont = new ClaseContenedora();
-		
-		
-
-		/*claseCont.guardarDBUsuario(1, 1, 100, "JorgeAlonsoSuS", "pepelotas1", 3200);
-		claseCont.guardarDBUsuario(2, 2, 200, "DavidBarrenechea", "pepelotas2", 3200);
-		claseCont.guardarDBUsuario(1, 2, 432, "DjLamentablisimo", "pepelotas3", 3200);
-		claseCont.guardarDBUsuario(25, 1, 500, "BellosoAsier", "pepelotas4", 3200);
-		*/
-		/*claseCont.guardarDBEdificio("Edificio1", 200, 7, 4, "imagen 1");
-		claseCont.guardarDBEdificio("Edificio2", 500, 3, 2, "imagen 2");
-		claseCont.guardarDBEdificio("Edificio3", 2300, 23, 34, "imagen 3");
-		claseCont.guardarDBEdificio("Edificio4", 67800, 34, 3, "imagen 4");
-		claseCont.guardarDBEdificio("Edificio5", 7600, 34, 2, "imagen 5");
-		claseCont.guardarDBEdificio("Edificio6", 12300, 34, 3, "imagen 6");
-		claseCont.guardarDBEdificio("Edificio7", 64300, 3, 67, "imagen 7");
-		claseCont.guardarDBEdificio("Edificio8", 900, 1, 93, "imagen 8");
-		*/
-		/*claseCont.borrarDBEdificio("Edificio7");
-		*/
-		//claseCont.guardarMejoras(2, "Odisea",  10, "kaka/img");	
-		//claseCont.borrarMejoras("Odisea");
-		/*claseCont.guardarDBEdificio("Edificio1", 120, 0, 1, "");
-		claseCont.guardarDBEdificio("Edificio2", 200, 0, 2, "");
-		claseCont.guardarDBEdificio("Edificio3", 250, 0, 3, "");
-		claseCont.guardarDBEdificio("Edificio4", 550, 0, 4, "");
-		claseCont.guardarDBEdificio("Edificio5", 1000, 0, 5, "");
-		claseCont.guardarDBEdificio("Edificio6", 2300, 0, 6, "");
-		claseCont.guardarDBEdificio("Edificio7", 5000, 0, 7, "");
-		claseCont.guardarDBEdificio("Edificio8", 7000, 0, 8, "");
-		claseCont.guardarDBEdificio("Edificio9", 10000, 0, 9, "");
-		claseCont.guardarDBEdificio("Edificio10", 20000, 0, 10, "");
-		claseCont.guardarDBEdificio("Edificio11", 25000, 0, 11, "");
-		claseCont.guardarDBEdificio("Edificio12", 30000, 0, 12, "");
-		claseCont.guardarDBEdificio("Edificio13", 40000, 0, 13, "");
-		claseCont.guardarDBEdificio("Edificio14", 50000, 0, 14, "");
-		claseCont.guardarDBEdificio("Edificio15", 75000, 0, 15, "");
-		claseCont.guardarDBEdificio("Edificio16", 100000, 0, 16, "");
-		claseCont.guardarDBEdificio("Edificio17", 500000, 0, 17, "");
-		*/
-		//System.out.println(claseCont.sacarUsuarios());
-		/*claseCont.guardarMejoras(200, "Mejora de Produccion", 2, "");
-		claseCont.guardarMejoras(200, "Mejora de Clicks", 2, "");
-		claseCont.guardarMejoras(200, "Mejora de ProduccionEdificios", 2, "");
-		*/
-	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// MODIFICACIÓN DE LA APUESTA 2 CON SU EVENTO DE RATON ////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Usuario> sacarUsuarios(){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
@@ -90,11 +46,16 @@ public class ClaseContenedora {
 			return null;
 		
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA CAMBIAR LOS ATRIBUTOS DEL USUARIO DE LA BD/////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void actualizarPartida(String usuario, long a, int b, int c){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("UPDATE usuario SET dinero_total = "+ a +", dinero_click= "+ b +", dinero_por_segundo = "+ c +" where nombre_usuario = '"+ usuario+"';");
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
@@ -107,6 +68,10 @@ public class ClaseContenedora {
 			}
 		
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA SACAR EL ARRAYLIST CON LOS USUARIOS DE LA BD //////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Edificios> sacarEdificios(){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
@@ -133,13 +98,17 @@ public class ClaseContenedora {
 			return null;
 		
 	}
-	
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA METER UN USUARIO EN LA BASE DE DATOS //////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
 		try {
 			
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO usuario VALUES ('%s', %d, %d, '%s', %d, %d)", usuario, dinero_total, dinero_click, contraseña, dinero_segundo, cooldown);
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
@@ -152,11 +121,16 @@ public class ClaseContenedora {
 			}
 		
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA BORRAR UN USUARIO DE LA BASE DE DATOS /////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void borrarDBUsuario(String usuario){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("DELETE FROM usuario where nombre_usuario = '"+ usuario+"';");
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
@@ -169,11 +143,16 @@ public class ClaseContenedora {
 			}
 		
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA CAMBIAR LA CONTRASEÑA DEL USUARIO SELECCIONADO EN LA BD ///////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void cambiarContraseñaBD(String usuario, String contraseña, String nuevaContra){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("UPDATE usuario SET contraseña = '"+nuevaContra+"' where nombre_usuario = '"+ usuario+"' AND contraseña= '"+contraseña+"';");
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
@@ -186,11 +165,16 @@ public class ClaseContenedora {
 			}
 		
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA METER UN NUEVO EDIFICIO EN LA BD //////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void guardarDBEdificio(String nombre, long precio, long cant, int prod, String image ){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO edificios VALUES ('%s', %d, %d, %d, '%s')", nombre, precio, cant, prod, image);
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
@@ -203,11 +187,16 @@ public class ClaseContenedora {
 			}
 		
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA BORRAR UN EDIFICIO DE LA BD ///////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void borrarDBEdificio(String nombre){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("DELETE FROM edificios where nombre = '"+ nombre+"';");
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
@@ -220,11 +209,16 @@ public class ClaseContenedora {
 			}
 		
 	}
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA AÑADIR MEJORAS EN LA BD ///////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void guardarMejoras( long precio, String nombre, long incremento, String img){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO mejoras VALUES ( %d,'%s', %d, '%s')", precio, nombre, incremento, img);
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
@@ -237,12 +231,16 @@ public class ClaseContenedora {
 			}
 		
 	}
-	
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////// FUNCION PARA BORRAR MEJORA DE LA BD ////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void borrarMejoras(String nombre){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
 			String sql = String.format("DELETE FROM mejoras where nombre = '"+ nombre+"';");
+			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
