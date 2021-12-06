@@ -94,7 +94,7 @@ public class VentanaClick extends JFrame {
 		ClaseContenedora cc = new ClaseContenedora();
 		
 		//Creación de ArrayList donde almacenaremos todos los elementos de Edificios
-		ArrayList<Edificios> listaEdifs = cc.sacarEdificios();
+		listaEdifs = cc.sacarEdificios();
 		//Creacion de Logger que utilizaremos para comentar parte del codigo y su funcionamiento.
 		Logger logger = Logger.getLogger(VentanaClick.class.getName());
 		
@@ -374,7 +374,11 @@ public class VentanaClick extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Todavia no tiene funcionalidad porque no tenemos una ventana para los usuarios.
+				String cont = JOptionPane.showInputDialog(ventana, "Ponga su contraseña: ", "");
+				if(cont.equals(VentanaUsuario.usuarioActual.getContraseña())) {
+					String cont2 = JOptionPane.showInputDialog(ventana, "Ponga su nueva contraseña: ", "");
+					cc.cambiarContraseñaBD(VentanaUsuario.usuarioActual.getnUsuario(), cont, cont2);
+				}
 				
 			}
 		});
@@ -386,11 +390,20 @@ public class VentanaClick extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres reiniciar la partida y perder todo tu progreso?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(opcion==0) {
-					dinero_total = 0;
-					dinero_por_segundo=1; 
-					dinero_click=1;				
+					cc.actualizarPartida(VentanaUsuario.usuarioActual.getnUsuario(),0,1,1);	
+					ClaseContenedora classo = new ClaseContenedora();
+					ArrayList<Usuario> lista = classo.sacarUsuarios();
+					for(Usuario u : lista) {
+						if(u.getnUsuario().equals(VentanaUsuario.usuarioActual.getnUsuario())) {
+							dinero_click = u.getDinero_click_personal();
+							dinero_por_segundo = u.getDinero_por_segundo_personal();
+							dinero_total = u.getDinero_total_personal();
+							System.out.println(dinero_click+"   "+dinero_por_segundo+"   "+dinero_total);
+						}
+					}
+			
 					hilo.interrupt();
-					
+				
 				}if(opcion==1) {
 				}
 			}
@@ -403,8 +416,8 @@ public class VentanaClick extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				cc.actualizarPartida(VentanaUsuario.usuarioActual.getnUsuario(),dinero_total,dinero_click,dinero_por_segundo);	
+								
 			}
 		});
 		menuitem5.addActionListener(new ActionListener() {

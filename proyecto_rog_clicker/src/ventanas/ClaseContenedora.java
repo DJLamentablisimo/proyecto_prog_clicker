@@ -90,6 +90,23 @@ public class ClaseContenedora {
 			return null;
 		
 	}
+	public void actualizarPartida(String usuario, long a, int b, int c){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			String sql = String.format("UPDATE usuario SET dinero_total = "+ a +", dinero_click= "+ b +", dinero_por_segundo = "+ c +" where nombre_usuario = '"+ usuario+"';");
+			stmt.executeUpdate(sql);
+			stmt.close();
+			Statement stmt2 = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+			stmt2.close();
+			rs.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+		
+	}
 	public ArrayList<Edificios> sacarEdificios(){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
@@ -152,7 +169,7 @@ public class ClaseContenedora {
 			}
 		
 	}
-	private void cambiarContraseñaBD(String usuario, String contraseña, String nuevaContra){
+	public void cambiarContraseñaBD(String usuario, String contraseña, String nuevaContra){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();

@@ -38,7 +38,7 @@ public class VentanaUsuario extends JFrame{
 		tUsuario = new JTextField();
 		lContraseña = new JLabel("Contraseña:");
 		tContraseña = new JPasswordField();
-		newUsuario = new JButton("¿Crear nuevo Usuario");
+		newUsuario = new JButton("Crear nuevo Usuario");
 		botonIni = new JButton("Iniciar sesion");
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(4,2));
