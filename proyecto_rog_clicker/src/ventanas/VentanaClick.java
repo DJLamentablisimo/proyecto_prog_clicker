@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,6 +43,7 @@ import javax.swing.event.ListSelectionListener;
 import clases.Apuestas;
 import clases.Edificios;
 import clases.Usuario;
+import ventanas.VentanaClick.FondoFlechaIzq;
 import ventanas.VentanaClick.MyCellRenderer;
 
 
@@ -118,10 +121,11 @@ public class VentanaClick extends JFrame {
 		liste.setFont(new Font("Arial", Font.ITALIC, 30));
 		
 		sPanel = new JScrollPane(liste);
-		superior = new JPanel();
+		superior = new FondoPanel();
 		pMenuSup = new JPanel();
 		panelProduccion = new JPanel();
 		panelProduccion.setLayout(new GridLayout(2,1));
+		panelProduccion.setBorder(BorderFactory.createLineBorder(Color.red));
 		pMenuSup.setLayout(new GridLayout(1,4));
 		inferior = new JPanel();
 		inferior.setLayout(new GridLayout(1,3));
@@ -161,7 +165,7 @@ public class VentanaClick extends JFrame {
 				}
 			}
 		});
-		blanco1=new JLabel();
+		blanco1=new FondoFlechaIzq();
 		pApuestas.setLayout(new GridLayout(5, 2));
 		pApuestas.add(apuesta1);
 		pApuestas.add(blanco1);
@@ -198,7 +202,7 @@ public class VentanaClick extends JFrame {
 		});
 		
 		
-		blanco2=new JLabel();
+		blanco2=new FondoFlechaDer();
 		pApuestas.add(blanco2);
 		pApuestas.add(apuesta2);
 		
@@ -236,7 +240,7 @@ public class VentanaClick extends JFrame {
 		});
 		
 		
-		blanco3=new JLabel();
+		blanco3=new FondoFlechaIzq();
 		pApuestas.add(apuesta3);
 		pApuestas.add(blanco3);
 		
@@ -265,7 +269,7 @@ public class VentanaClick extends JFrame {
 		});
 		
 		
-		blanco4=new JLabel();
+		blanco4=new FondoFlechaDer();
 		pApuestas.add(blanco4);
 		pApuestas.add(apuesta4);
 		
@@ -284,7 +288,7 @@ public class VentanaClick extends JFrame {
 			}
 		});
 		
-		blanco5=new JLabel();
+		blanco5=new FondoFlechaIzq();
 		pApuestas.add(apuesta5);
 		pApuestas.add(blanco5);
 		
@@ -294,7 +298,7 @@ public class VentanaClick extends JFrame {
 		blanco = new JLabel();
 		alternativa = new JLabel();
 		
-		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_total));
+		puntuacion = new JLabel("Ca$h Money Baby: "+String.valueOf(dinero_total)+"  ");
 		puntuacion.setFont(new Font("Castellar", Font.BOLD, 20));
 		produccion = new JLabel("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
 		produccion.setFont(new Font("Castellar", Font.ITALIC, 11));
@@ -453,7 +457,7 @@ public class VentanaClick extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				dinero_total=dinero_total+dinero_click;
 				logger.info("click");
-				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total)+"  ");
 				
 			}
 		});
@@ -508,23 +512,6 @@ public class VentanaClick extends JFrame {
 		
 	}
 
-	private static void anyadirApuestas(String nombre, boolean x, Color color, JPanel panel, String lugar) {
-		JLabel vacio = new JLabel();
-		JLabel apuestita=new JLabel(nombre);
-		apuestita.setOpaque(x);
-		apuestita.setBackground(color);
-		
-		if(lugar=="izquierda") {
-			panel.add(apuestita);
-			panel.add(vacio);
-		}else if(lugar=="derecha") {
-			panel.add(vacio);
-			panel.add(apuestita);
-		}
-		
-	
-	}
-
 	private void abrirNavegador(java.awt.event.ActionEvent evt) {                                         
         try {
             Desktop.getDesktop().browse(new URI("https://youtu.be/dQw4w9WgXcQ"));
@@ -548,7 +535,7 @@ public class VentanaClick extends JFrame {
 						//VentanaClick v= new VentanaClick();
 						Thread.sleep(1000);
 						dinero_total = dinero_total+dinero_por_segundo;
-						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+						puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total)+"  ");
 						//for(int i=0; i=v.listaEdifs.; i++)
 						//dinero_por_segundo=liste
 						produccion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
@@ -613,5 +600,56 @@ public class VentanaClick extends JFrame {
         }
 
     }
+    class FondoPanel extends JPanel{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 401471556325269633L;
+		private Image imagen;
+		
+		@Override
+		public void paint(Graphics g) {
+			imagen = new ImageIcon(getClass().getResource("/ventanas/xinxin.jpg")).getImage();
+			g.drawImage(imagen, 0, 0, getWidth(), getHeight(), ventana);
+			setOpaque(false);
+			super.paint(g);
+		}
+
+	}
+	class FondoFlechaIzq extends JLabel{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 401471556325269633L;
+		private Image imagen;
+		
+		@Override
+		public void paint(Graphics g) {
+			imagen = new ImageIcon(getClass().getResource("/ventanas/izqflecha.png")).getImage();
+			g.drawImage(imagen, 0, 0, getWidth(), getHeight(), ventana);
+			setOpaque(false);
+			super.paint(g);
+		}
+
+	}
+	class FondoFlechaDer extends JLabel{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 401471556325269633L;
+		private Image imagen;
+		
+		@Override
+		public void paint(Graphics g) {
+			imagen = new ImageIcon(getClass().getResource("/ventanas/derflecha.png")).getImage();
+			g.drawImage(imagen, 0, 0, getWidth(), getHeight(), ventana);
+			setOpaque(false);
+			super.paint(g);
+		}
+
+	}
 
 }

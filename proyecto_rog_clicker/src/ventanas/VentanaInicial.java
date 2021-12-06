@@ -49,7 +49,7 @@ public class VentanaInicial extends JFrame{
 		
 		JPanel i = new JPanel();
 		i.setBackground(Color.BLACK);
-		JLabel neew = new JLabel("By Jorge Alonso, David Barrenechea, Daniel Galean y Asier Belloso Sainz", SwingConstants.RIGHT);
+		JLabel neew = new JLabel("By Jorge Alonso, David Barrenechea, Daniel Galean y Asier Belloso", SwingConstants.RIGHT);
 		neew.setForeground(Color.white);
 		i.add(neew);
 		add(i,BorderLayout.SOUTH);
