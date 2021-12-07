@@ -20,7 +20,7 @@ public class Edificios extends ElementoJuego implements Serializable {
 		this.eImg=image;
 	}
 
-	
+
 
 	public long geteCantidad() {
 		return eCantidad;

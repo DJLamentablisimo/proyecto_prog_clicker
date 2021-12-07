@@ -143,6 +143,8 @@ public class ClaseContenedora {
 			}
 		
 	}
+	
+	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA CAMBIAR LA CONTRASEÑA DEL USUARIO SELECCIONADO EN LA BD ///////////////////
@@ -255,4 +257,5 @@ public class ClaseContenedora {
 
 		
 	}
+	
 }
