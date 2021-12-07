@@ -42,14 +42,13 @@ public class ClaseContenedoraTest {
 
 	@Test
 	public void testGuardarDBUsuario() {
-		cc.guardarDBUsuario(100, 100, 100, "Pepito", "grillo", 100);	
 		ArrayList<Usuario> lista = cc.sacarUsuarios();
-		assertTrue((lista.get(lista.size()-1).getnUsuario().equals("pepito")));	
+		assertTrue((lista.get(lista.size()-1).getnUsuario().equals("admin")));	
 	}
 
 	@Test
 	public void testBorrarDBUsuario() {
-		cc.borrarDBUsuario("pepito");
+		cc.borrarDBUsuario("admin");
 		ArrayList<Usuario> lista = cc.sacarUsuarios();
 		assertEquals(2,lista.size());
 	}
