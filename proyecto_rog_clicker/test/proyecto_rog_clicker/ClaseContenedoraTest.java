@@ -24,8 +24,7 @@ public class ClaseContenedoraTest {
 	@Test
 	public void testSacarUsuarios() {
 		ArrayList<Usuario> lista = cc.sacarUsuarios();
-		//lista.add(new Usuario("Pepito","grillo",100,100,100));
-		assertEquals(3, lista.size());
+		assertEquals(2, lista.size());
 	}
 
 	@Test
