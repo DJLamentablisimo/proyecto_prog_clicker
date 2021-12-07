@@ -38,7 +38,7 @@ public class ClaseContenedoraTest {
 		lista.add(new Edificios("Barco",100,100,100,""));
 		assertEquals(18,lista.size());
 	}
-	/**
+	
 
 	@Test
 	public void testGuardarDBUsuario() {
@@ -46,9 +46,7 @@ public class ClaseContenedoraTest {
 		ArrayList<Usuario> lista = cc.sacarUsuarios();
 		assertTrue((lista.get(lista.size()-1).getnUsuario().equals("pepito")));	
 	}
-/**
- * 
- */
+
 	@Test
 	public void testBorrarDBUsuario() {
 		cc.borrarDBUsuario("pepito");
