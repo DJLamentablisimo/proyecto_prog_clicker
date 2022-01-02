@@ -37,6 +37,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -60,8 +61,8 @@ public class VentanaClick extends JFrame {
 	private JPanel inferior;
 
 	static int cooldown;
-	static int dinero_click=VentanaUsuario.usuarioActual.getDinero_click_personal();
-	static int dinero_por_segundo=VentanaUsuario.usuarioActual.getDinero_por_segundo_personal();
+	static int dinero_click= VentanaUsuario.usuarioActual.getDinero_click_personal();
+	static int dinero_por_segundo= VentanaUsuario.usuarioActual.getDinero_por_segundo_personal();
 	static long dinero_total = VentanaUsuario.usuarioActual.getDinero_total_personal();
 	
 
@@ -139,7 +140,7 @@ public class VentanaClick extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// MODIFICACIÓN DE LA APUESTA 1 CON SU EVENTO DE RATON ////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		apuesta1=new JLabel(apuesta01.getNombre());
+		apuesta1=new JLabel(apuesta01.getNombre(), SwingConstants.CENTER);
 		apuesta1.setBackground(Color.BLUE);
 		apuesta1.setOpaque(true);
 		apuesta1.addMouseListener(new MouseAdapter() {
@@ -177,7 +178,7 @@ public class VentanaClick extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// MODIFICACIÓN DE LA APUESTA 2 CON SU EVENTO DE RATON ////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		apuesta2=new JLabel(apuesta02.getNombre());
+		apuesta2=new JLabel(apuesta02.getNombre(), SwingConstants.CENTER);
 		apuesta2.setBackground(Color.RED);
 		apuesta2.setOpaque(true);
 		apuesta2.addMouseListener(new MouseAdapter() {
@@ -215,7 +216,7 @@ public class VentanaClick extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// MODIFICACIÓN DE LA APUESTA 3 CON SU EVENTO DE RATON ////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		apuesta3=new JLabel(apuesta03.getNombre());
+		apuesta3=new JLabel(apuesta03.getNombre(), SwingConstants.CENTER);
 		apuesta3.setBackground(Color.GREEN);
 		apuesta3.setOpaque(true);
 		apuesta3.addMouseListener(new MouseAdapter() {
@@ -253,7 +254,7 @@ public class VentanaClick extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// MODIFICACIÓN DE LA APUESTA 4 CON SU EVENTO DE RATON ////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		apuesta4=new JLabel(apuesta04.getNombre());
+		apuesta4=new JLabel(apuesta04.getNombre(), SwingConstants.CENTER);
 		apuesta4.setBackground(Color.GRAY);
 		apuesta4.setOpaque(true);
 		apuesta4.addMouseListener(new MouseAdapter() {
@@ -286,7 +287,7 @@ public class VentanaClick extends JFrame {
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		////////// MODIFICACIÓN DE LA APUESTA 5 CON SU EVENTO DE RATON ////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		apuesta5=new JLabel("Apuesta maligna");
+		apuesta5=new JLabel("Apuesta maligna", SwingConstants.CENTER);
 		apuesta5.setBackground(Color.PINK);
 		apuesta5.setOpaque(true);
 		apuesta5.addMouseListener(new MouseAdapter() {
@@ -646,7 +647,7 @@ public class VentanaClick extends JFrame {
 		
 		@Override
 		public void paint(Graphics g) {
-			imagen = new ImageIcon(getClass().getResource("/ventanas/xinxin.jpg")).getImage();
+			imagen = new ImageIcon(getClass().getResource("/ventanas/eurosistem.jpg")).getImage();
 			g.drawImage(imagen, 0, 0, getWidth(), getHeight(), ventana);
 			setOpaque(false);
 			super.paint(g);
