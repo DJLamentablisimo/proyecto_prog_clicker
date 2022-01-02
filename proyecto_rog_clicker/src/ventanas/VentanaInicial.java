@@ -35,7 +35,7 @@ public class VentanaInicial extends JFrame{
 		icono = new JLabel();
 		Image img;
 		try {
-			img = ImageIO.read(getClass().getResource("bisnes.png"));
+			img = ImageIO.read(getClass().getResource("bisnes.png"));   
 			icono.setIcon(new ImageIcon(img));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
