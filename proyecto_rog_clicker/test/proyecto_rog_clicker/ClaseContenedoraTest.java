@@ -29,9 +29,19 @@ public class ClaseContenedoraTest {
 		assertEquals(2, lista.size());
 	}
 
+	//Comprueba si los datos de juego de un jugador se han actualizado correctamente en la base de datos.
+	
 	@Test
 	public void testActualizarPartida() {
-		
+		ArrayList<Usuario>lista = cc.sacarUsuarios();
+		cc.actualizarPartida("admin", 0, 0, 0);
+		for (Usuario u: lista) {
+			if(u.getnUsuario().equals("admin")) {
+				assertEquals(0,u.getDinero_click_personal());
+				assertEquals(0,u.getDinero_por_segundo_personal());
+				assertEquals(0,u.getDinero_total_personal());
+			}
+	}
 	}
 	
 	//Comprueba que la cantidad de edificios guardados en la base de datos es correcta
@@ -57,9 +67,16 @@ public class ClaseContenedoraTest {
 		assertEquals(2,lista.size());
 	}
 	
+	//Comprueba que la contraseña se ha cambiado correctamente en la base de datos
 	@Test
 	public void testCambiarContraseñaBD() {
-		
+		ArrayList<Usuario>lista = cc.sacarUsuarios();
+		cc.cambiarContraseñaBD("admin", "123", "012");
+	for (Usuario u: lista) {
+		if(u.getnUsuario().equals("admin")) {
+			assertEquals("012",u.getContraseña());		
+		}
+	}	
 	}
 	
 	//Comprueba que se guarda de manera correcta un nuevo edificio en la base de datos
@@ -78,7 +95,10 @@ public class ClaseContenedoraTest {
 		assertEquals(17,lista.size());
 		
 	}
-	
+	@Test
+	public void testGuardarMejoras() {
+		
+	}
 	@Test
 	public void testBorrarMejoras() {
 		
