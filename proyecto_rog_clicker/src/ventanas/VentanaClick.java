@@ -473,6 +473,9 @@ public class VentanaClick extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaUsuario.main(null);
+				dinero_click=0;
+				dinero_por_segundo=0;
+				hilo.interrupt();
 				dispose();
 			}
 		});
