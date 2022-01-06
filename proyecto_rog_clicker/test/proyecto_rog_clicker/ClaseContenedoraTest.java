@@ -55,7 +55,7 @@ public class ClaseContenedoraTest {
 	@Test
 	public void testGuardarDBUsuario() {
 		ArrayList<Usuario> lista = cc.sacarUsuarios();
-		cc.guardarDBUsuario(100, 100, 100, "pepito", "grillo", 100);
+		cc.guardarDBUsuario(100, 100, 100, "pepito", "grillo");
 		assertTrue((lista.get(lista.size()-1).getnUsuario().equals("pepito")));	
 	}
 	

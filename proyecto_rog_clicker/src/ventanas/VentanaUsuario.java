@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import clases.Edificios;
 import clases.Usuario;
 
 public class VentanaUsuario extends JFrame{
@@ -31,6 +32,7 @@ public class VentanaUsuario extends JFrame{
 	private JButton botonIni;
 	private JPanel panel;
 	public static Usuario usuarioActual;
+	public ArrayList<Usuario> listaUsuarios;
 	
 	public VentanaUsuario() {
 		ClaseContenedora cc = new ClaseContenedora();
@@ -50,7 +52,7 @@ public class VentanaUsuario extends JFrame{
 		panel.add(tContraseña);
 		panel.add(newUsuario);
 		panel.add(botonIni);
-		ArrayList<Usuario> listaUsuarios = cc.sacarUsuarios();
+		listaUsuarios= cc.sacarUsuarios();
 		
 		
 		
@@ -61,9 +63,12 @@ public class VentanaUsuario extends JFrame{
 				for(Usuario u : listaUsuarios) {
 					String valorPass = new String(tContraseña.getPassword());
 					if(u.getnUsuario().equals(tUsuario.getText()) && u.getContraseña().equals(valorPass)) {
-						System.out.println(u);
 						usuarioActual = u;
 						System.out.println("Buenos dias Sr." + u.getnUsuario());
+						ArrayList<Edificios> lyt = cc.sacarEdificios();
+						for(int i = 0; i<lyt.size(); i++) {
+							cc.añadirCantidades(u.getnUsuario(), i);
+						}
 						VentanaClick.main(null);
 						dispose();
 					}else {
@@ -88,9 +93,12 @@ public class VentanaUsuario extends JFrame{
 				}else {
 					int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres crear un usuario con nombre: "+tUsuario.getText()+ " y contraseña: "+valorPass+"?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					if(opcion==0) {
-						cc.guardarDBUsuario(1, 1, 0, tUsuario.getText(), valorPass, 3200);
-						dispose();
-						VentanaInicial.main(null);
+						cc.guardarDBUsuario(1, 1, 0, tUsuario.getText(), valorPass);
+						ArrayList<Edificios> edifs = cc.sacarEdificios();
+						for(Edificios j : edifs) {
+							cc.guardaredificiosPersonales(tUsuario.getText(), j.getNombre());
+						}
+						listaUsuarios = cc.sacarUsuarios();
 					}if(opcion==1) {
 						
 					}

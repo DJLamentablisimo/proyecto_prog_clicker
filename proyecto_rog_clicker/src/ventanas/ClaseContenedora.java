@@ -102,12 +102,12 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA METER UN USUARIO EN LA BASE DE DATOS //////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña, int cooldown){
+	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña){
 		try {
 			
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
-			String sql = String.format("INSERT INTO usuario VALUES ('%s', %d, %d, '%s', %d, %d)", usuario, dinero_total, dinero_click, contraseña, dinero_segundo, cooldown);
+			String sql = String.format("INSERT INTO usuario VALUES ('%s', %d, %d, '%s', %d)", usuario, dinero_total, dinero_click, contraseña, dinero_segundo);
 			logger.log(Level.INFO, "Statement: " + sql);
 			stmt.executeUpdate(sql);
 			stmt.close();
@@ -134,7 +134,8 @@ public class ClaseContenedora {
 			stmt.executeUpdate(sql);
 			stmt.close();
 			Statement stmt2 = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+			ResultSet rs = stmt.executeQuery("DELETE FROM personedif where codigoUsuario = '"+ usuario+"';");
+			logger.log(Level.INFO, "Statement: " + "DELETE FROM personedif where codigoUsuario = '"+ usuario+"';");
 			stmt2.close();
 			rs.close();
 			conn.close(); 
@@ -253,9 +254,94 @@ public class ClaseContenedora {
 			} catch (SQLException e) {
 			System.out.println("No se ha podido cargar el driver de la base de datos");
 			}
-		
-
+	
+	}
+	public void guardaredificiosPersonales( String cod1, String cod2){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			String sql = String.format("INSERT INTO personedif VALUES ('%s', '%s', %d)", cod1, cod2, 0);
+			logger.log(Level.INFO, "Statement: " + sql);
+			stmt.executeUpdate(sql);
+			stmt.close();
+			Statement stmt2 = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM p");
+			stmt2.close();
+			rs.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
 		
 	}
-	
+	public ArrayList<ArrayList<String>> sacarEdificiosPersonales(String u) {
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			ArrayList<ArrayList<String>> listadelusuario = new ArrayList<>();
+			String sql = "SELECT * FROM personedif where codigoUsuario= '"+u+"';";
+			logger.log(Level.INFO, "Statement: " + sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			while( rs.next() ) { 
+				ArrayList<String> xd = new ArrayList<>();
+				String cd = rs.getString("codigoEdificio");
+				String ct = rs.getString("cantidad");
+				xd.add(cd);
+				xd.add(ct);
+				listadelusuario.add(xd);
+			}
+			
+			rs.close();
+			stmt.close();
+			conn.close(); 
+			return listadelusuario;
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+			return null;
+	}
+	public void añadirCantidades(String u, int num) {
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			ArrayList<ArrayList<String>> listadelusuario = sacarEdificiosPersonales(u);
+			Statement stmt = conn.createStatement();
+			String sql = "UPDATE edificios SET eCantidad= "+Integer.parseInt(listadelusuario.get(num).get(1))+" where nombre = '"+listadelusuario.get(num).get(0)+"';";
+			logger.log(Level.INFO, "Statement: " + sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.close();
+			stmt.close();
+			conn.close();
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+			
+	}
+	public void actualizarPersonalEdifi(String usuario, int numerito){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			String sql = String.format("UPDATE personedif SET cantidad = "+ numerito +" where codigoUsuario = '"+ usuario+"';");
+			logger.log(Level.INFO, "Statement: " + sql);
+			stmt.executeUpdate(sql);
+			stmt.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+		
+	}
+	public void actualizarPersonalEdifi2(String usuario, String str2, int numerito){
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Statement stmt = conn.createStatement();
+			String sql = String.format("UPDATE personedif SET cantidad = "+ numerito +" where codigoUsuario = '"+ usuario+"' and codigoEdificio = '"+str2+"';");
+			logger.log(Level.INFO, "Statement: " + sql);
+			stmt.executeUpdate(sql);
+			stmt.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+			}
+		
+	}
 }

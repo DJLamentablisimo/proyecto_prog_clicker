@@ -94,11 +94,17 @@ public class VentanaClick extends JFrame {
 	
 	private static VentanaClick ventana;
 	
+	public long dineroAlComenzar = 0;
+	
 	public VentanaClick() {
 		ClaseContenedora cc = new ClaseContenedora();
 		
 		//Creación de ArrayList donde almacenaremos todos los elementos de Edificios
 		listaEdifs = cc.sacarEdificios();
+		for(Edificios ewe : listaEdifs) {
+			dineroAlComenzar=dineroAlComenzar+(ewe.geteCantidad()*ewe.geteProduccion());
+		}
+		dinero_por_segundo = dinero_por_segundo + (int) dineroAlComenzar;
 		//Creacion de Logger que utilizaremos para comentar parte del codigo y su funcionamiento.
 		Logger logger = Logger.getLogger(VentanaClick.class.getName());
 		
@@ -378,13 +384,11 @@ public class VentanaClick extends JFrame {
 								dinero_total = (int) (dinero_total- edf.getPrecio());
 								dinero_por_segundo = dinero_por_segundo+(int)edf.geteProduccion();
 								liste.clearSelection();
+							}else {
+								System.out.println("no tienes pasta");
+								liste.clearSelection();
 							}
-				else {
-						
-					System.out.println("no tienes pasta");
-					liste.clearSelection();
-				}
-				logger.info("Incrementa");
+							logger.info("Incrementa");
 				}
 			}
 			}
@@ -423,6 +427,7 @@ public class VentanaClick extends JFrame {
 				int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres reiniciar la partida y perder todo tu progreso?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(opcion==0) {
 					cc.actualizarPartida(VentanaUsuario.usuarioActual.getnUsuario(),0,1,1);	
+					cc.actualizarPersonalEdifi(VentanaUsuario.usuarioActual.getnUsuario(),0);
 					ClaseContenedora classo = new ClaseContenedora();
 					ArrayList<Usuario> lista = classo.sacarUsuarios();
 					for(Usuario u : lista) {
@@ -430,7 +435,6 @@ public class VentanaClick extends JFrame {
 							dinero_click = u.getDinero_click_personal();
 							dinero_por_segundo = u.getDinero_por_segundo_personal();
 							dinero_total = u.getDinero_total_personal();
-							System.out.println(dinero_click+"   "+dinero_por_segundo+"   "+dinero_total);
 						}
 					}
 			
@@ -455,7 +459,9 @@ public class VentanaClick extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cc.actualizarPartida(VentanaUsuario.usuarioActual.getnUsuario(),dinero_total,dinero_click,dinero_por_segundo);	
-								
+				for(int i = 0; i<listaEdifs.size(); i++) {
+					cc.actualizarPersonalEdifi2(VentanaUsuario.usuarioActual.getnUsuario(), listaEdifs.get(i).getNombre(),(int) listaEdifs.get(i).geteCantidad());
+				}				
 			}
 		});
 
