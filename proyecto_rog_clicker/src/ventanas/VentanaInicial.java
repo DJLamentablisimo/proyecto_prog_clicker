@@ -73,7 +73,7 @@ public class VentanaInicial extends JFrame{
 	class hilo extends Thread{
 		public void run() {
 			Salir(2000);
-			VentanaUsuario.main(null);
+			VentanaSeleccionUsuario.main(null);
 			dispose();
 		}
 	}
