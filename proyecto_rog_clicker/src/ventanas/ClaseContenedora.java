@@ -20,9 +20,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// MODIFICACIÓN DE LA APUESTA 2 CON SU EVENTO DE RATON ////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public ArrayList<Usuario> sacarUsuarios(){
+	public ArrayList<Usuario> sacarUsuarios(String nombredb){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			ArrayList<Usuario> dev = new ArrayList<>();
 			String sql = "SELECT * FROM usuario";
@@ -50,9 +50,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA CAMBIAR LOS ATRIBUTOS DEL USUARIO DE LA BD/////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void actualizarPartida(String usuario, long a, int b, int c){
+	public void actualizarPartida(String nombredb,String usuario, long a, int b, int c){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("UPDATE usuario SET dinero_total = "+ a +", dinero_click= "+ b +", dinero_por_segundo = "+ c +" where nombre_usuario = '"+ usuario+"';");
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -72,9 +72,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA SACAR EL ARRAYLIST CON LOS USUARIOS DE LA BD //////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public ArrayList<Edificios> sacarEdificios(){
+	public ArrayList<Edificios> sacarEdificios(String nombredb){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			ArrayList<Edificios> dev = new ArrayList<>();
 			String sql = "SELECT * FROM edificios";
@@ -102,10 +102,10 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA METER UN USUARIO EN LA BASE DE DATOS //////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void guardarDBUsuario(int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña){
+	public void guardarDBUsuario(String nombredb,int dinero_click, int dinero_segundo, long dinero_total, String usuario, String contraseña){
 		try {
 			
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO usuario VALUES ('%s', %d, %d, '%s', %d)", usuario, dinero_total, dinero_click, contraseña, dinero_segundo);
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -125,9 +125,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA BORRAR UN USUARIO DE LA BASE DE DATOS /////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void borrarDBUsuario(String usuario){
+	public void borrarDBUsuario(String nombredb,String usuario){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("DELETE FROM usuario where nombre_usuario = '"+ usuario+"';");
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -150,9 +150,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA CAMBIAR LA CONTRASEÑA DEL USUARIO SELECCIONADO EN LA BD ///////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void cambiarContraseñaBD(String usuario, String contraseña, String nuevaContra){
+	public void cambiarContraseñaBD(String nombredb,String usuario, String contraseña, String nuevaContra){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("UPDATE usuario SET contraseña = '"+nuevaContra+"' where nombre_usuario = '"+ usuario+"' AND contraseña= '"+contraseña+"';");
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -172,9 +172,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA METER UN NUEVO EDIFICIO EN LA BD //////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void guardarDBEdificio(String nombre, long precio, long cant, int prod, String image ){
+	public void guardarDBEdificio(String nombredb,String nombre, long precio, long cant, int prod, String image ){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO edificios VALUES ('%s', %d, %d, %d, '%s')", nombre, precio, cant, prod, image);
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -194,9 +194,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA BORRAR UN EDIFICIO DE LA BD ///////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void borrarDBEdificio(String nombre){
+	public void borrarDBEdificio(String nombredb,String nombre){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("DELETE FROM edificios where nombre = '"+ nombre+"';");
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -216,9 +216,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA AÑADIR MEJORAS EN LA BD ///////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void guardarMejoras( long precio, String nombre, long incremento, String img){
+	public void guardarMejoras( String nombredb,long precio, String nombre, long incremento, String img){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO mejoras VALUES ( %d,'%s', %d, '%s')", precio, nombre, incremento, img);
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -238,9 +238,9 @@ public class ClaseContenedora {
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA BORRAR MEJORA DE LA BD ////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void borrarMejoras(String nombre){
+	public void borrarMejoras(String nombredb,String nombre){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("DELETE FROM mejoras where nombre = '"+ nombre+"';");
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -256,9 +256,9 @@ public class ClaseContenedora {
 			}
 	
 	}
-	public void guardaredificiosPersonales( String cod1, String cod2){
+	public void guardaredificiosPersonales( String nombredb,String cod1, String cod2){
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			String sql = String.format("INSERT INTO personedif VALUES ('%s', '%s', %d)", cod1, cod2, 0);
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -274,9 +274,9 @@ public class ClaseContenedora {
 			}
 		
 	}
-	public ArrayList<ArrayList<String>> sacarEdificiosPersonales(String u) {
+	public ArrayList<ArrayList<String>> sacarEdificiosPersonales(String nombredb,String u) {
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
 			ArrayList<ArrayList<String>> listadelusuario = new ArrayList<>();
 			String sql = "SELECT * FROM personedif where codigoUsuario= '"+u+"';";
@@ -300,10 +300,10 @@ public class ClaseContenedora {
 			}
 			return null;
 	}
-	public void añadirCantidades(String u, int num) {
+	public void añadirCantidades(String nombredb,String u, int num) {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
-			ArrayList<ArrayList<String>> listadelusuario = sacarEdificiosPersonales(u);
+			ArrayList<ArrayList<String>> listadelusuario = sacarEdificiosPersonales("Usuario.db",u);
 			Statement stmt = conn.createStatement();
 			String sql = "UPDATE edificios SET eCantidad= "+Integer.parseInt(listadelusuario.get(num).get(1))+" where nombre = '"+listadelusuario.get(num).get(0)+"';";
 			logger.log(Level.INFO, "Statement: " + sql);
@@ -316,7 +316,7 @@ public class ClaseContenedora {
 			}
 			
 	}
-	public void actualizarPersonalEdifi(String usuario, int numerito){
+	public void actualizarPersonalEdifi(String nombredb,String usuario, int numerito){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();
@@ -330,7 +330,7 @@ public class ClaseContenedora {
 			}
 		
 	}
-	public void actualizarPersonalEdifi2(String usuario, String str2, int numerito){
+	public void actualizarPersonalEdifi2(String nombredb,String usuario, String str2, int numerito){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
 			Statement stmt = conn.createStatement();

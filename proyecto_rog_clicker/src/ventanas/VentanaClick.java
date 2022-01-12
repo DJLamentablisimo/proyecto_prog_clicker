@@ -100,7 +100,7 @@ public class VentanaClick extends JFrame {
 		ClaseContenedora cc = new ClaseContenedora();
 		
 		//Creación de ArrayList donde almacenaremos todos los elementos de Edificios
-		listaEdifs = cc.sacarEdificios();
+		listaEdifs = cc.sacarEdificios("Usuario.db");
 		for(Edificios ewe : listaEdifs) {
 			dineroAlComenzar=dineroAlComenzar+(ewe.geteCantidad()*ewe.geteProduccion());
 		}
@@ -420,7 +420,7 @@ public class VentanaClick extends JFrame {
 				String cont = JOptionPane.showInputDialog(ventana, "Ponga su contraseña: ", "");
 				if(cont.equals(VentanaUsuario.usuarioActual.getContraseña())) {
 					String cont2 = JOptionPane.showInputDialog(ventana, "Ponga su nueva contraseña: ", "");
-					cc.cambiarContraseñaBD(VentanaUsuario.usuarioActual.getnUsuario(), cont, cont2);
+					cc.cambiarContraseñaBD("Usuario.db",VentanaUsuario.usuarioActual.getnUsuario(), cont, cont2);
 				}
 				
 			}
@@ -436,10 +436,10 @@ public class VentanaClick extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres reiniciar la partida y perder todo tu progreso?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(opcion==0) {
-					cc.actualizarPartida(VentanaUsuario.usuarioActual.getnUsuario(),0,1,1);	
-					cc.actualizarPersonalEdifi(VentanaUsuario.usuarioActual.getnUsuario(),0);
+					cc.actualizarPartida("Usuario.db",VentanaUsuario.usuarioActual.getnUsuario(),0,1,1);	
+					cc.actualizarPersonalEdifi("Usuario.db",VentanaUsuario.usuarioActual.getnUsuario(),0);
 					ClaseContenedora classo = new ClaseContenedora();
-					ArrayList<Usuario> lista = classo.sacarUsuarios();
+					ArrayList<Usuario> lista = classo.sacarUsuarios("Usuario.db");
 					for(Usuario u : lista) {
 						if(u.getnUsuario().equals(VentanaUsuario.usuarioActual.getnUsuario())) {
 							dinero_click = u.getDinero_click_personal();
@@ -468,9 +468,9 @@ public class VentanaClick extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cc.actualizarPartida(VentanaUsuario.usuarioActual.getnUsuario(),dinero_total,dinero_click,dinero_por_segundo);	
+				cc.actualizarPartida("Usuario.db",VentanaUsuario.usuarioActual.getnUsuario(),dinero_total,dinero_click,dinero_por_segundo);	
 				for(int i = 0; i<listaEdifs.size(); i++) {
-					cc.actualizarPersonalEdifi2(VentanaUsuario.usuarioActual.getnUsuario(), listaEdifs.get(i).getNombre(),(int) listaEdifs.get(i).geteCantidad());
+					cc.actualizarPersonalEdifi2("Usuario.db",VentanaUsuario.usuarioActual.getnUsuario(), listaEdifs.get(i).getNombre(),(int) listaEdifs.get(i).geteCantidad());
 				}				
 			}
 		});

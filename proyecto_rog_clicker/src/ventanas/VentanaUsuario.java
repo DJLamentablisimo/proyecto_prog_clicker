@@ -52,7 +52,7 @@ public class VentanaUsuario extends JFrame{
 		panel.add(tContraseña);
 		panel.add(newUsuario);
 		panel.add(botonIni);
-		listaUsuarios= cc.sacarUsuarios();
+		listaUsuarios= cc.sacarUsuarios("Usuario.db");
 		
 		
 		
@@ -65,9 +65,9 @@ public class VentanaUsuario extends JFrame{
 					if(u.getnUsuario().equals(tUsuario.getText()) && u.getContraseña().equals(valorPass)) {
 						usuarioActual = u;
 						System.out.println("Buenos dias Sr." + u.getnUsuario());
-						ArrayList<Edificios> lyt = cc.sacarEdificios();
+						ArrayList<Edificios> lyt = cc.sacarEdificios("Usuario.db");
 						for(int i = 0; i<lyt.size(); i++) {
-							cc.añadirCantidades(u.getnUsuario(), i);
+							cc.añadirCantidades("Usuario.db",u.getnUsuario(), i);
 						}
 						VentanaClick.main(null);
 						dispose();
@@ -93,12 +93,12 @@ public class VentanaUsuario extends JFrame{
 				}else {
 					int opcion = JOptionPane.showConfirmDialog(null, "¿Estas seguro de que quieres crear un usuario con nombre: "+tUsuario.getText()+ " y contraseña: "+valorPass+"?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					if(opcion==0) {
-						cc.guardarDBUsuario(1, 1, 0, tUsuario.getText(), valorPass);
-						ArrayList<Edificios> edifs = cc.sacarEdificios();
+						cc.guardarDBUsuario("Usuario.db",1, 1, 0, tUsuario.getText(), valorPass);
+						ArrayList<Edificios> edifs = cc.sacarEdificios("Usuario.db");
 						for(Edificios j : edifs) {
-							cc.guardaredificiosPersonales(tUsuario.getText(), j.getNombre());
+							cc.guardaredificiosPersonales("Usuario.db",tUsuario.getText(), j.getNombre());
 						}
-						listaUsuarios = cc.sacarUsuarios();
+						listaUsuarios = cc.sacarUsuarios("Usuario.db");
 					}if(opcion==1) {
 						
 					}
