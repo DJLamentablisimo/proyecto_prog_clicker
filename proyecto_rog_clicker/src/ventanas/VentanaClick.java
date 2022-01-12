@@ -149,6 +149,8 @@ public class VentanaClick extends JFrame {
 		apuesta1=new JLabel(apuesta01.getNombre(), SwingConstants.CENTER);
 		apuesta1.setBackground(Color.BLUE);
 		apuesta1.setOpaque(true);
+		String textoApuesta1="50% de posibilidades de recibir o perder un 5% de tu capital";
+		apuesta1.setToolTipText(textoApuesta1);
 		apuesta1.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -187,6 +189,8 @@ public class VentanaClick extends JFrame {
 		apuesta2=new JLabel(apuesta02.getNombre(), SwingConstants.CENTER);
 		apuesta2.setBackground(Color.RED);
 		apuesta2.setOpaque(true);
+		String textoApuesta2="50% de posibilidades de recibir o perder siete veces tu valor por click";
+		apuesta2.setToolTipText(textoApuesta2);
 		apuesta2.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -225,6 +229,8 @@ public class VentanaClick extends JFrame {
 		apuesta3=new JLabel(apuesta03.getNombre(), SwingConstants.CENTER);
 		apuesta3.setBackground(Color.GREEN);
 		apuesta3.setOpaque(true);
+		String textoApuesta3="50% de posibilidades de duplicarte o reducirte a la mitad tus ingresos por segundo";
+		apuesta3.setToolTipText(textoApuesta3);
 		apuesta3.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -263,6 +269,8 @@ public class VentanaClick extends JFrame {
 		apuesta4=new JLabel(apuesta04.getNombre(), SwingConstants.CENTER);
 		apuesta4.setBackground(Color.GRAY);
 		apuesta4.setOpaque(true);
+		String textoApuesta4="Eliges la cantidad de capital a apostar, pudiendo ganar un 15% extra de ese dinero o perderlo todo en el proceso";
+		apuesta4.setToolTipText(textoApuesta4);
 		apuesta4.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -296,6 +304,8 @@ public class VentanaClick extends JFrame {
 		apuesta5=new JLabel("Apuesta maligna", SwingConstants.CENTER);
 		apuesta5.setBackground(Color.PINK);
 		apuesta5.setOpaque(true);
+		String textoApuesta5="¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜¿̷̳̻͔̮̓̌͋͂͂́͆͐?̴̰̽̍̚¿̸̲͇͉̂̊̒͗͜͠͝ͅ¿̶̦̬̮̓̍?̷̠̩̽̒͌͑̈́¿̶̥̱͍͈̜̩͇̀̅͌̑͆̉̕?̸̨̫̱͖̝͈̭̼̃͒̂̅̇̒?̶̣͔͒̽̽͠¿̶̨̛͎͔̺̆͗̾̓̍͐̿?̸̛̠͕̊̈́̎͘͜";
+		apuesta5.setToolTipText(textoApuesta5);
 		apuesta5.addMouseListener(new MouseAdapter() {
 
 			@Override
