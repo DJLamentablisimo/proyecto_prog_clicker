@@ -43,6 +43,7 @@ import javax.swing.event.ListSelectionListener;
 
 import clases.Apuestas;
 import clases.Edificios;
+import clases.Mejoras;
 import clases.Usuario;
 import ventanas.VentanaClick.FondoFlechaIzq;
 import ventanas.VentanaClick.MyCellRenderer;
@@ -74,21 +75,27 @@ public class VentanaClick extends JFrame {
 	private ArrayList<Edificios> listaEdifs;
 	
 	private JScrollPane sPanel;
-	private JScrollPane pMejorasScroll;
-	private JPanel pMejoras;
+	//private JScrollPane pMejorasScroll;
 	private JButton bJuegoExtra;
 	
 	private JPanel pApuestas;
+	private JPanel pMejoras;
 	private JLabel apuesta1;
 	private JLabel apuesta2;
 	private JLabel apuesta3;
 	private JLabel apuesta4;
 	private JLabel apuesta5;
+	private JLabel mejora1;
+	private JLabel mejora2;
+	private JLabel mejora3;
 	private JLabel blanco1;
 	private JLabel blanco2;
 	private JLabel blanco3;
 	private JLabel blanco4;
 	private JLabel blanco5;
+	private JLabel blanco6;
+	private JLabel blanco7;
+	private JLabel blanco8;
 	
 	private JPanel panelProduccion;
 	
@@ -111,7 +118,7 @@ public class VentanaClick extends JFrame {
 		//Creación de apuestas
 		
 			//Te suma o resta cantidad de dinero
-			Apuestas apuesta01= new Apuestas("Préstamo inestable",99, Double.valueOf(dinero_total*0.05).longValue(), "" );
+			Apuestas apuesta01= new Apuestas("Préstamo inestable",1, Double.valueOf(dinero_total*0.05).longValue(), "" );
 			//Te da o te quita x7 potencia de clicks
 			Apuestas apuesta02= new Apuestas("El ratoncito loco",100, Double.valueOf(dinero_click*7).longValue(), "" );
 			//Te aumenta o te reduce el dinero que ganas por segundo
@@ -119,7 +126,11 @@ public class VentanaClick extends JFrame {
 			//Eliges la cantidad de capital a apostar, pudiendo ganar un 15% extra de ese dinero o perderlo todo en el proceso
 			Apuestas apuesta04 = new Apuestas("A ver si hay huevos", 0, Double.valueOf(dinero_total).longValue(),"");
 			
+		//Creación de mejoras
 			
+			Mejoras mejora01 = new Mejoras("Invierte en acciones con eToro",1,2,0,0,"");
+			Mejoras mejora02 = new Mejoras("Se tu propio jefe",1,0,10,0,"");
+			Mejoras mejora03 = new Mejoras("Loteria del Estado",1,0,0,2,"");
 		
 		//Creación de componentes de la ventana
 		liste = new JList<>();
@@ -136,8 +147,9 @@ public class VentanaClick extends JFrame {
 		pMenuSup.setLayout(new GridLayout(1,4));
 		inferior = new JPanel();
 		inferior.setLayout(new GridLayout(1,3));
-		pMejorasScroll = new JScrollPane();
+		//pMejorasScroll = new JScrollPane();
 		pApuestas = new JPanel();
+		pMejoras = new JPanel();
 		bJuegoExtra=new JButton("Juego extra");
 		bJuegoExtra.setBackground(Color.black);
 		bJuegoExtra.setForeground(Color.white);
@@ -254,6 +266,7 @@ public class VentanaClick extends JFrame {
 					produccion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
 					
 					logger.info("La apuesta 3 tiene efecto");
+					
 				}
 			}
 		});
@@ -362,6 +375,49 @@ public class VentanaClick extends JFrame {
 		pMenuSup.add(bJuegoExtra);
 		
 		
+		 	////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////// MODIFICACIÓN DE LA MEJORA 1 CON SU EVENTO DE RATON ////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		mejora1=new JLabel(mejora01.getNombre(), SwingConstants.CENTER);
+		mejora1.setBackground(Color.BLUE);
+		mejora1.setOpaque(true);
+		String textoMejora1="Duplica el dinero por segundo que ganas";
+		mejora1.setToolTipText(textoMejora1);
+		mejora1.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				logger.info(String.valueOf(mejora01.getPrecio()));
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(dinero_total>=100) {
+					dinero_total-=mejora01.getPrecio();
+					dinero_por_segundo=(int) mejora01.efecto(mejora01.getIncrementoDps(),dinero_por_segundo);
+					
+					puntuacion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
+					logger.info("La mejora 1 se ha aplicado correctamente");
+					pMejoras.remove(mejora1);
+					mejora1.setOpaque(false);
+					setVisible(false);
+					setVisible(true);									
+					
+				}
+			}
+		});	
+		pMejoras.setLayout(new GridLayout(5, 2));
+		pMejoras.add(mejora1);	
+		 
+		 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// AÑADIR ELEMENTOS DEL PANEL SUPERIOR ////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -403,7 +459,6 @@ public class VentanaClick extends JFrame {
 			}
 			}
 		});
-
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// ACTIONLISTENERS DE LOS DIFERENTES ELEMENTOS DEL JMENU //////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -525,7 +580,7 @@ public class VentanaClick extends JFrame {
 		//Añadir todos los paneles a la Ventana
 		inferior.add(pApuestas, BorderLayout.WEST);
 		inferior.add(sPanel, BorderLayout.CENTER);
-		inferior.add(pMejorasScroll, BorderLayout.EAST);
+		inferior.add(pMejoras, BorderLayout.EAST);
 			
 		setLayout(new BorderLayout());
 		add(pMenuSup, BorderLayout.NORTH);
