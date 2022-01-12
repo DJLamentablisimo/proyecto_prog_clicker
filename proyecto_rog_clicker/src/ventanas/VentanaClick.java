@@ -128,9 +128,9 @@ public class VentanaClick extends JFrame {
 			
 		//Creación de mejoras
 			
-			Mejoras mejora01 = new Mejoras("Invierte en acciones con eToro",1,2,0,0,"");
-			Mejoras mejora02 = new Mejoras("Se tu propio jefe",1,0,10,0,"");
-			Mejoras mejora03 = new Mejoras("Loteria del Estado",1,0,0,2,"");
+			Mejoras mejora01 = new Mejoras("Invierte en acciones con eToro",1,2,0,0);
+			Mejoras mejora02 = new Mejoras("Se tu propio jefe",1,0,10,0);
+			Mejoras mejora03 = new Mejoras("Loteria del Estado",1,0,0,2);
 		
 		//Creación de componentes de la ventana
 		liste = new JList<>();

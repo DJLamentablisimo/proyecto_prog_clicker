@@ -13,14 +13,13 @@ public class Mejoras extends ElementoJuego implements Serializable {
 	
 	String mImg;
 	
-	public Mejoras(String nombre, long precio, long incrementodps, long incrementodc, long incrementodt, String img) {
+	public Mejoras(String nombre, long precio, long incrementodps, long incrementodc, long incrementodt) {
 		super(precio,nombre);
 		this.precio = precio;
 		this.nombre = nombre;
 		this.mincrementodps = incrementodps;
 		this.mincrementodc = incrementodc;
 		this.mincrementodt = incrementodt;
-		this.mImg = img;
 	
 	}
 
@@ -48,14 +47,6 @@ public class Mejoras extends ElementoJuego implements Serializable {
 		this.mincrementodt = incrementodt;
 	}
 
-	public String getmImg() {
-		return mImg;
-	}
-
-	public void setmImg(String mImg) {
-		this.mImg = mImg;
-	}
-	
 	@Override
 	public long efecto(long boost, long cant) {
 		cant = cant*boost;
