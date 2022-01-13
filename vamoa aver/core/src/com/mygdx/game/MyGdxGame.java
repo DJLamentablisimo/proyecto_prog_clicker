@@ -47,7 +47,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	   
 	   public void guardarPuntos(int puntos){
 			try {			
-				Connection conn = DriverManager.getConnection("jdbc:sqlite:Usuario.db");
+				Connection conn = DriverManager.getConnection("jdbc:sqlite:src//Usuario.db");
 				Statement stmt = conn.createStatement();
 				String sql = String.format("INSERT INTO punto VALUES (%d)", puntos);
 				//logger.log(Level.INFO, "Statement: " + sql);
@@ -59,7 +59,7 @@ public class MyGdxGame extends ApplicationAdapter {
 				rs.close();
 				conn.close(); 
 				} catch (SQLException e) {
-				System.out.println("No se ha podido cargar el driver de la base de datos");
+				System.out.println(e);
 				}
 			
 		}
