@@ -41,6 +41,8 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import com.mygdx.game.desktop.DesktopLauncher;
+
 import clases.Apuestas;
 import clases.Edificios;
 import clases.Mejoras;
@@ -154,6 +156,16 @@ public class VentanaClick extends JFrame {
 		bJuegoExtra=new JButton("Juego extra");
 		bJuegoExtra.setBackground(Color.black);
 		bJuegoExtra.setForeground(Color.white);
+		
+		//Activación del juego
+		bJuegoExtra.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				DesktopLauncher.main(null);
+				
+			}
+		});
 		
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////////
