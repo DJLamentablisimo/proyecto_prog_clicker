@@ -16,6 +16,48 @@ import org.json.simple.JSONObject;
 
 public class ClaseContenedora {
 	private static Logger logger = Logger.getLogger("ClaseContenedora");
+	
+	///////////////////////////////////////////////////
+	/////////// RECLAMAR LA PUNTUACION ////////////////
+	///////////////////////////////////////////////////
+	
+	public long cargarPuntos(String nomdb){
+		try {			
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nomdb);
+			Statement stmt = conn.createStatement();
+			long dev;
+			/*String sql = String.format("SELECT elpunto FROM punto");
+			//logger.log(Level.INFO, "Statement: " + sql);
+			stmt.executeUpdate(sql);
+			stmt.close();
+			Statement stmt2 = conn.createStatement();*/
+			ResultSet rs = stmt.executeQuery("SELECT * FROM punto WHERE elpunto>0");
+			dev=rs.getInt("elpunto");
+			rs.close();
+			stmt.close();
+			conn.close(); 
+			System.out.println(dev);
+			return dev;
+			} catch (SQLException e) {
+			System.out.println(e);
+			}
+			return 1;
+	}
+	
+	public void borraPuntos(String nomdb){
+		try {			
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nomdb);
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("DELETE FROM punto WHERE elpunto>0");
+			rs.close();
+			stmt.close();
+			conn.close(); 
+			} catch (SQLException e) {
+			System.out.println(e);
+			}
+	}
+	
+	
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// MODIFICACIÓN DE LA APUESTA 2 CON SU EVENTO DE RATON ////////////////////////////////////

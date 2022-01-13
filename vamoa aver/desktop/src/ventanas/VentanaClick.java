@@ -67,7 +67,7 @@ public class VentanaClick extends JFrame {
 	static int dinero_click= VentanaUsuario.usuarioActual.getDinero_click_personal();
 	static int dinero_por_segundo= VentanaUsuario.usuarioActual.getDinero_por_segundo_personal();
 	static long dinero_total = VentanaUsuario.usuarioActual.getDinero_total_personal();
-	public static int ult_puntuacion;
+	public static long ult_puntuacion=0;
 	
 
 	private JPanel pMenuSup;
@@ -80,6 +80,7 @@ public class VentanaClick extends JFrame {
 	private JScrollPane sPanel;
 	//private JScrollPane pMejorasScroll;
 	private JButton bJuegoExtra;
+	private JButton claim;
 	
 	private JPanel pApuestas;
 	private JPanel pMejoras;
@@ -156,13 +157,33 @@ public class VentanaClick extends JFrame {
 		bJuegoExtra=new JButton("Juego extra");
 		bJuegoExtra.setBackground(Color.black);
 		bJuegoExtra.setForeground(Color.white);
+		claim=new JButton("Reclamar");
+		claim.setBackground(Color.black);
+		claim.setBackground(Color.white);
 		
 		//Activación del juego
 		bJuegoExtra.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				hilo.interrupt();
 				DesktopLauncher.main(null);
+			}
+		});
+		
+		//Reclamar recompensa del juego
+		claim.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				ClaseContenedora cls = new ClaseContenedora();
+				ult_puntuacion=cls.cargarPuntos("Usuario.db");
+				System.out.println(ult_puntuacion);
+				if(ult_puntuacion!=1) {dinero_total+=ult_puntuacion*1000;}
+				cls.borraPuntos("Usuario.db");
+				ult_puntuacion=0;
 				
 			}
 		});
@@ -386,6 +407,7 @@ public class VentanaClick extends JFrame {
 		pMenuSup.add(new JLabel());
 		pMenuSup.add(new JLabel());
 		pMenuSup.add(bJuegoExtra);
+		pMenuSup.add(claim);
 		
 		
 		 	////////////////////////////////////////////////////////////////////////////////////////////////////

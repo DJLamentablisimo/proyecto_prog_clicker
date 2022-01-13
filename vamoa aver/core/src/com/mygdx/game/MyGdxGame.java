@@ -55,6 +55,11 @@ public class MyGdxGame extends ApplicationAdapter {
 				stmt.close();
 				Statement stmt2 = conn.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM punto");
+				while( rs.next() ) { 
+					int i = rs.getInt("elpunto");
+					System.out.println(i);
+				}
+				
 				stmt2.close();
 				rs.close();
 				conn.close(); 
@@ -160,11 +165,12 @@ public class MyGdxGame extends ApplicationAdapter {
 	   @Override
 	   public void dispose() {
 	     //Se cierra todo
-		  guardarPuntos(puntos);
+		  
 	      dineroCae.dispose();
 	      cubo.dispose();
 	      sonidoCoger.dispose();
 	      musicaFondo.dispose();
+	      guardarPuntos(puntos);
 	      batch.dispose();
 	      Gdx.app.exit();
 	     
