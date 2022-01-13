@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import org.junit.Test;
 
 import clases.Edificios;
+import clases.Mejoras;
 import clases.Usuario;
 import ventanas.ClaseContenedora;
 
@@ -98,12 +99,32 @@ public class ClaseContenedoraTest {
 	@Test
 	public void testGuardarMejoras() {
 		
+		
 	}
 	@Test
 	public void testBorrarMejoras() {
 		
 	}
-	
+	@Test
+	public void testGuardarEdificiosPersonales() {
+		
+	}
+	@Test
+	public void testSacarEdificiosPersonales() {
+		
+	}
+	@Test
+	public void testAñadirCantidades() {
+		
+	}
+	@Test
+	public void testActualizarPersonalEdifi() {
+		
+	}
+	@Test
+	public void testActualizarPersonalEdifi2() {
+		
+	}
 	
 
 }
