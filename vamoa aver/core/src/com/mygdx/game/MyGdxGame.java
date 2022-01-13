@@ -115,7 +115,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	        	 fallos+=1;
 	        	 if(fallos==3){
 	        		 
-	        		 //Aqui pasamos los datos
 	        		 dispose();
 	        		 
 	        	 }
@@ -140,6 +139,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	      sonidoCoger.dispose();
 	      musicaFondo.dispose();
 	      batch.dispose();
+	      String archivo = "proyecto_prog_clicker/vamoa aver/desktop/src/Usuario.db";
 	      Gdx.app.exit();
 	      //System.exit(0);
 	   }
