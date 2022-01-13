@@ -92,6 +92,9 @@ public class VentanaClick extends JFrame {
 	private JLabel mejora1;
 	private JLabel mejora2;
 	private JLabel mejora3;
+	private JLabel mejora4;
+	private JLabel mejora5;
+	private JLabel mejora6;
 	private JLabel blanco1;
 	private JLabel blanco2;
 	private JLabel blanco3;
@@ -135,6 +138,9 @@ public class VentanaClick extends JFrame {
 			Mejoras mejora01 = new Mejoras("Invierte en acciones con eToro",1,2,0,0);
 			Mejoras mejora02 = new Mejoras("Se tu propio jefe",1,0,10,0);
 			Mejoras mejora03 = new Mejoras("Loteria del Estado",1,0,0,2);
+			Mejoras mejora04 = new Mejoras("Suben las acciones de tu empresa",1,2,0,0);
+			Mejoras mejora05 = new Mejoras("Ingresaste en la facultad de ADE",1,0,10,0);
+			Mejoras mejora06 = new Mejoras("La mafia compra tu silencio",1,0,0,3);
 		
 		//Creación de componentes de la ventana
 		liste = new JList<>();
@@ -444,7 +450,8 @@ public class VentanaClick extends JFrame {
 					pMejoras.remove(mejora1);
 					mejora1.setOpaque(false);
 					setVisible(false);
-					setVisible(true);									
+					setVisible(true);	
+					hilo.interrupt();
 					
 				}
 			}
@@ -452,8 +459,224 @@ public class VentanaClick extends JFrame {
 		pMejoras.setLayout(new GridLayout(5, 2));
 		pMejoras.add(mejora1);	
 		 
-		 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////// MODIFICACIÓN DE LA MEJORA 2 CON SU EVENTO DE RATON ////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		mejora2=new JLabel(mejora02.getNombre(), SwingConstants.CENTER);
+		mejora2.setBackground(Color.RED);
+		mejora2.setOpaque(true);
+		String textoMejora2="Gana 10 veces mas dinero por click";
+		mejora2.setToolTipText(textoMejora2);
+		mejora2.addMouseListener(new MouseAdapter() {
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		logger.info(String.valueOf(mejora01.getPrecio()));
+		
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(dinero_total>=100) {
+					dinero_total-=mejora02.getPrecio();
+					dinero_click=(int) mejora02.efecto(mejora02.getIncrementoDc(),dinero_click);
+					
+					logger.info("La mejora 2 se ha aplicado correctamente");
+					pMejoras.remove(mejora2);
+					mejora2.setOpaque(false);
+					setVisible(false);
+					setVisible(true);	
+					hilo.interrupt();
+					
+					}
+				}
+			});	
+		pMejoras.setLayout(new GridLayout(5, 2));
+		pMejoras.add(mejora2);	
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////// MODIFICACIÓN DE LA MEJORA 3 CON SU EVENTO DE RATON ////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		mejora3=new JLabel(mejora03.getNombre(), SwingConstants.CENTER);
+		mejora3.setBackground(Color.GREEN);
+		mejora3.setOpaque(true);
+		String textoMejora3="Duplica tu capital con un solo click";
+		mejora3.setToolTipText(textoMejora3);
+		mejora3.addMouseListener(new MouseAdapter() {
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		logger.info(String.valueOf(mejora01.getPrecio()));
+		
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(dinero_total>=100) {
+					dinero_total-=mejora03.getPrecio();
+					dinero_total=mejora03.efecto(mejora03.getIncrementoDt(),dinero_total);
+					
+					puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+					
+					logger.info("La mejora 2 se ha aplicado correctamente");
+					pMejoras.remove(mejora3);
+					mejora3.setOpaque(false);
+					setVisible(false);
+					setVisible(true);	
+					hilo.interrupt();
+					
+					}
+				}
+			});	
+		pMejoras.setLayout(new GridLayout(5, 2));
+		pMejoras.add(mejora3);	
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////// MODIFICACIÓN DE LA MEJORA 4 CON SU EVENTO DE RATON ////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		mejora4=new JLabel(mejora04.getNombre(), SwingConstants.CENTER);
+		mejora4.setBackground(Color.CYAN);
+		mejora4.setOpaque(true);
+		String textoMejora4="Duplica el dinero por segundo que ganas";
+		mejora4.setToolTipText(textoMejora4);
+		mejora4.addMouseListener(new MouseAdapter() {
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			logger.info(String.valueOf(mejora04.getPrecio()));
+		
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(dinero_total>=100) {
+					dinero_total-=mejora04.getPrecio();
+					dinero_por_segundo=(int) mejora04.efecto(mejora04.getIncrementoDps(),dinero_por_segundo);
+		
+					puntuacion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
+					logger.info("La mejora 4 se ha aplicado correctamente");
+					pMejoras.remove(mejora4);
+					mejora4.setOpaque(false);
+					setVisible(false);
+					setVisible(true);	
+					hilo.interrupt();
+		
+				}
+			}
+		});	
+		pMejoras.setLayout(new GridLayout(5, 2));
+		pMejoras.add(mejora4);
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////// MODIFICACIÓN DE LA MEJORA 5 CON SU EVENTO DE RATON ////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		mejora5=new JLabel(mejora05.getNombre(), SwingConstants.CENTER);
+		mejora5.setBackground(Color.PINK);
+		mejora5.setOpaque(true);
+		String textoMejora5="Gana 10 veces mas dinero por click";
+		mejora5.setToolTipText(textoMejora5);
+		mejora5.addMouseListener(new MouseAdapter() {
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			logger.info(String.valueOf(mejora05.getPrecio()));
+		
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(dinero_total>=100) {
+				dinero_total-=mejora05.getPrecio();
+				dinero_click=(int) mejora05.efecto(mejora05.getIncrementoDc(),dinero_click);
+		
+				logger.info("La mejora 5 se ha aplicado correctamente");
+				pMejoras.remove(mejora5);
+				mejora2.setOpaque(false);
+				setVisible(false);
+				setVisible(true);	
+				hilo.interrupt();
+		
+				}
+			}
+		});	
+		pMejoras.setLayout(new GridLayout(5, 2));
+		pMejoras.add(mejora5);
+
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////// MODIFICACIÓN DE LA MEJORA 6 CON SU EVENTO DE RATON ////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		mejora6=new JLabel(mejora06.getNombre(), SwingConstants.CENTER);
+		mejora6.setBackground(Color.YELLOW);
+		mejora6.setOpaque(true);
+		String textoMejora6="Duplica tu capital con un solo click";
+		mejora6.setToolTipText(textoMejora3);
+		mejora6.addMouseListener(new MouseAdapter() {
+		
+		@Override
+		public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		}
+		
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			logger.info(String.valueOf(mejora06.getPrecio()));
+		
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			if(dinero_total>=100) {
+				dinero_total-=mejora06.getPrecio();
+				dinero_total=mejora06.efecto(mejora06.getIncrementoDt(),dinero_total);
+		
+				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
+				
+				logger.info("La mejora 6 se ha aplicado correctamente");
+				pMejoras.remove(mejora6);
+				mejora6.setOpaque(false);
+				setVisible(false);
+				setVisible(true);	
+				hilo.interrupt();
+				
+			}
+			}
+		});	
+		pMejoras.setLayout(new GridLayout(5, 2));
+		pMejoras.add(mejora6);	
+				
+				
+				////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// AÑADIR ELEMENTOS DEL PANEL SUPERIOR ////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		superior.add(blanco, BorderLayout.EAST);
@@ -494,6 +717,8 @@ public class VentanaClick extends JFrame {
 			}
 			}
 		});
+		
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// ACTIONLISTENERS DE LOS DIFERENTES ELEMENTOS DEL JMENU //////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
