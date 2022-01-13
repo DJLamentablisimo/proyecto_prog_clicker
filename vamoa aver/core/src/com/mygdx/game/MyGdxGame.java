@@ -1,5 +1,12 @@
 package com.mygdx.game;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -33,10 +40,29 @@ public class MyGdxGame extends ApplicationAdapter {
 	   private Rectangle cuboJuego;
 	   private Array<Rectangle> dinerops;
 	   private long ultimoBillete_t;
-	   private int puntos=0;
+	   public static int puntos=0;
 	   private int fallos=0;
 	   private BitmapFont font;
 	   private int velocidad=100;
+	   
+	   public void guardarPuntos(int puntos){
+			try {			
+				Connection conn = DriverManager.getConnection("jdbc:sqlite:Usuario.db");
+				Statement stmt = conn.createStatement();
+				String sql = String.format("INSERT INTO punto VALUES (%d)", puntos);
+				//logger.log(Level.INFO, "Statement: " + sql);
+				stmt.executeUpdate(sql);
+				stmt.close();
+				Statement stmt2 = conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM punto");
+				stmt2.close();
+				rs.close();
+				conn.close(); 
+				} catch (SQLException e) {
+				System.out.println("No se ha podido cargar el driver de la base de datos");
+				}
+			
+		}
 
 	   private void spawneaDinero() {
 		      Rectangle dinero = new Rectangle();
@@ -134,13 +160,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	   @Override
 	   public void dispose() {
 	     //Se cierra todo
+		  guardarPuntos(puntos);
 	      dineroCae.dispose();
 	      cubo.dispose();
 	      sonidoCoger.dispose();
 	      musicaFondo.dispose();
 	      batch.dispose();
-	      String archivo = "proyecto_prog_clicker/vamoa aver/desktop/src/Usuario.db";
 	      Gdx.app.exit();
+	     
 	      //System.exit(0);
 	   }
 }
