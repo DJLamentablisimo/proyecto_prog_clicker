@@ -21,6 +21,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import clases.Edificios;
+import clases.Mejoras;
 import clases.Usuario;
 
 
@@ -88,6 +89,10 @@ public class VentanaNewUsuario extends JFrame{
 						ArrayList<Edificios> edifs = cc.sacarEdificios("Usuario.db");
 						for(Edificios j : edifs) {
 							cc.guardaredificiosPersonales("Usuario.db", nuTextNombre.getText(), j.getNombre());
+						}
+						ArrayList<Mejoras> mej = cc.sacarMejoras("Usuario.db");
+						for(Mejoras m : mej) {
+							cc.guardarMejorasPersonales("Usuario.db", nuTextNombre.getText(), m.getNombre());
 						}
 					}if(opcion==1) {
 						
