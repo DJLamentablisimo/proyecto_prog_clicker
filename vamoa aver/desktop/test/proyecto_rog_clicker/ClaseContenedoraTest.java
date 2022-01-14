@@ -1,3 +1,5 @@
+package proyecto_rog_clicker;
+
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
@@ -25,7 +27,7 @@ public class ClaseContenedoraTest {
 	@Test
 	public void testSacarUsuarios() {
 		ArrayList<Usuario> lista = cc.sacarUsuarios("UsuarioTest.db");
-		assertEquals(6, lista.size());
+		assertEquals(5, lista.size());
 	}
 
 	//Comprueba si los datos de juego de un jugador se han actualizado correctamente en la base de datos.
