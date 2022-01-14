@@ -91,6 +91,7 @@ public class VentanaClick extends JFrame {
 	//private JScrollPane pMejorasScroll;
 	private JButton bJuegoExtra;
 	private JButton claim;
+	private JButton recur;
 	
 	private JPanel pApuestas;
 	private JPanel pMejoras;
@@ -427,6 +428,7 @@ public class VentanaClick extends JFrame {
 		pMenuSup.add(new JLabel());
 		pMenuSup.add(bJuegoExtra);
 		pMenuSup.add(claim);
+		
 		
 		
 		 	////////////////////////////////////////////////////////////////////////////////////////////////////
