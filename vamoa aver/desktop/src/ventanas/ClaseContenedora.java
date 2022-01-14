@@ -212,9 +212,9 @@ public class ClaseContenedora {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////// FUNCION PARA METER UN NUEVO EDIFICIO EN LA BD //////////////////////////////////////////
+	/////////// FUNCION PARA METER UN NUEVO EDIFICIO EN LA BD //////no se usa///////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void guardarDBEdificio(String nombredb,String nombre, long precio, long cant, int prod, String image ){
+	/*public void guardarDBEdificio(String nombredb,String nombre, long precio, long cant, int prod, String image ){
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/"+nombredb);
 			Statement stmt = conn.createStatement();
@@ -231,7 +231,7 @@ public class ClaseContenedora {
 			System.out.println("No se ha podido cargar el driver de la base de datos");
 			}
 		
-	}
+	}*/
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////// FUNCION PARA BORRAR UN EDIFICIO DE LA BD ///////////////////////////////////////////////

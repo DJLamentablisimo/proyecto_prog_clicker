@@ -55,17 +55,18 @@ public class ClaseContenedoraTest {
 	//Comprueba que se guarda de manera correcta una nuevo usuario en la base de datos
 	@Test
 	public void testGuardarDBUsuario() {
-		ArrayList<Usuario> lista = cc.sacarUsuarios("UsuarioTest.db");
 		cc.guardarDBUsuario("UsuarioTest.db",100, 100, 100, "pepito", "grillo");
+		ArrayList<Usuario> lista = cc.sacarUsuarios("UsuarioTest.db");
+		
 		assertTrue((lista.get(lista.size()-1).getnUsuario().equals("pepito")));	
 	}
 	
 	//Comprueba que se borra correctamente un usuario de la base de datos
 	@Test
 	public void testBorrarDBUsuario() {
-		ArrayList<Usuario>lista = cc.sacarUsuarios("UsuarioTest.db");
 		cc.borrarDBUsuario("UsuarioTest.db","pepito");
-		assertEquals(6,lista.size());
+		ArrayList<Usuario>lista = cc.sacarUsuarios("UsuarioTest.db");
+		assertEquals(5,lista.size());
 	}
 	
 	//Comprueba que la contraseña se ha cambiado correctamente en la base de datos
@@ -80,13 +81,7 @@ public class ClaseContenedoraTest {
 	}	
 	}
 	
-	//Comprueba que se guarda de manera correcta un nuevo edificio en la base de datos
-	@Test
-	public void testGuardarDBEdificio() {
-	ArrayList<Edificios> lista = cc.sacarEdificios("UsuarioTest.db");
-	cc.guardarDBEdificio("UsuarioTest.db","prueba", 100, 100, 100, "");
-	assertTrue((lista.get(lista.size()-1).getNombre().equals("prueba")));	
-	}
+	
 	
 	//Comprueba que se borra correctamente un edificio de la base de datos
 	@Test
