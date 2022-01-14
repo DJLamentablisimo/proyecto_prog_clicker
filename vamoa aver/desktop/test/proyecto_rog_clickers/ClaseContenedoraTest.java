@@ -1,4 +1,4 @@
-package proyecto_rog_clicker;
+package proyecto_rog_clickers;
 
 import static org.junit.Assert.*;
 
@@ -81,8 +81,7 @@ public class ClaseContenedoraTest {
 	}	
 	}
 	
-	
-	
+
 	//Comprueba que se borra correctamente un edificio de la base de datos
 	@Test
 	public void testBorrrarDBEdificio() {
@@ -91,37 +90,36 @@ public class ClaseContenedoraTest {
 		assertEquals(17,lista.size());
 	
 	}
-	/**	
-	@Test
-	public void testGuardarMejoras() {
-		
-		
-	}
-	@Test
-	public void testBorrarMejoras() {
-		
-	}
+
+	
 	@Test
 	public void testGuardarEdificiosPersonales() {
-		
+		cc.guardaredificiosPersonales("UsuarioTest.bd", "paco", "prueba");
+		ArrayList<ArrayList<String>> lista = cc.sacarEdificiosPersonales("UsuarioTest.bd", "paco");
+		assertEquals(18,lista.size());
 	}
 	@Test
 	public void testSacarEdificiosPersonales() {
-		
-	}
-	@Test
-	public void testAñadirCantidades() {
+		ArrayList<ArrayList<String>> lista = cc.sacarEdificiosPersonales("UsuarioTest.bd", "paco");
+		assertEquals(17,lista.size());
 		
 	}
 	@Test
 	public void testActualizarPersonalEdifi() {
-		
+		cc.actualizarPersonalEdifi("UsuarioTest.bd", "paco", 7);
+		ArrayList<ArrayList<String>> lista = cc.sacarEdificiosPersonales("UsuarioTest.bd", "paco");
+		for (ArrayList<String> i: lista) {
+				assertEquals(7,i.get(1));
+			
+		}
 	}
 	@Test
 	public void testActualizarPersonalEdifi2() {
-		
+		cc.actualizarPersonalEdifi2("UsuarioTest.bd", "paco", "Paga de la Yaya", 1);
+		ArrayList<ArrayList<String>> lista = cc.sacarEdificiosPersonales("UsuarioTest.bd", "paco");
+		assertEquals(1,lista.get(1).get(1));
 	}
-	**/
+
 		
 
 }

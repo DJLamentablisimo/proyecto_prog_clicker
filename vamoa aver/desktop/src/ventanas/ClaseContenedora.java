@@ -342,6 +342,7 @@ public class ClaseContenedora {
 			}
 			return null;
 	}
+	
 	public void añadirCantidades(String nombredb,String u, int num) {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:src/Usuario.db");
