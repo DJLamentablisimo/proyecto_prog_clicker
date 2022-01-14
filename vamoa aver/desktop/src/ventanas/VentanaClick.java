@@ -47,6 +47,7 @@ import clases.Apuestas;
 import clases.Edificios;
 import clases.Mejoras;
 import clases.Usuario;
+import clases.mejorasPorUsuario;
 import ventanas.VentanaClick.FondoFlechaIzq;
 import ventanas.VentanaClick.MyCellRenderer;
 
@@ -76,6 +77,15 @@ public class VentanaClick extends JFrame {
 
 	private JList<Edificios> liste;
 	private ArrayList<Edificios> listaEdifs;
+	private ArrayList<Usuario> listaUsuarios;
+	private ArrayList<Mejoras> listaMejoras;
+	private int cantidadMejora;
+	//private int cantidadMejora2;
+	//private int cantidadMejora3;
+	//private int cantidadMejora4;
+	//private int cantidadMejora5;
+	//private int cantidadMejora6;
+	private ArrayList<mejorasPorUsuario> listamejorasUsu;
 	
 	private JScrollPane sPanel;
 	//private JScrollPane pMejorasScroll;
@@ -115,6 +125,9 @@ public class VentanaClick extends JFrame {
 		
 		//Creación de ArrayList donde almacenaremos todos los elementos de Edificios
 		listaEdifs = cc.sacarEdificios("Usuario.db");
+		listaUsuarios = cc.sacarUsuarios("Usuario.db");
+		listamejorasUsu = cc.sacarMejorasUsuarios("Usuario.db");
+		listaMejoras = cc.sacarMejoras("Usuario.db");
 		for(Edificios ewe : listaEdifs) {
 			dineroAlComenzar=dineroAlComenzar+(ewe.geteCantidad()*ewe.geteProduccion());
 		}
@@ -419,45 +432,56 @@ public class VentanaClick extends JFrame {
 		 	////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// MODIFICACIÓN DE LA MEJORA 1 CON SU EVENTO DE RATON ////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////////////
-		
 		mejora1=new JLabel(mejora01.getNombre(), SwingConstants.CENTER);
 		mejora1.setBackground(Color.BLUE);
 		mejora1.setOpaque(true);
 		String textoMejora1="Duplica el dinero por segundo que ganas";
 		mejora1.setToolTipText(textoMejora1);
-		mejora1.addMouseListener(new MouseAdapter() {
+		
+		pMejoras.setLayout(new GridLayout(5, 2));
+		pMejoras.add(mejora1);
+				for (mejorasPorUsuario mejorUs : listamejorasUsu) {
+					if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Invierte en acciones con eToro")&& mejorUs.getCantidad()==0) {	
+						mejora1.addMouseListener(new MouseAdapter() {
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							logger.info(String.valueOf(mejora01.getPrecio()));
+							
+						}
+						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							if(dinero_total>=100) {
+								dinero_total-=mejora01.getPrecio();
+								
+								dinero_por_segundo=(int) mejora01.efecto(mejora01.getIncrementoDps(),dinero_por_segundo);								
+								produccion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
+								logger.info("La mejora 1 se ha aplicado correctamente");
+								cc.actualizarPersonalMejoras("Usuario.db", VentanaUsuario.usuarioActual.getnUsuario(), "Invierte en acciones con eToro", 1);
+								pMejoras.remove(mejora1);
+								mejora1.setOpaque(false);
+								repaint();	
+								//hilo.interrupt();
+								
+							}
+						}
+					});	
+						
+						
+					} else if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Invierte en acciones con eToro")&& mejorUs.getCantidad()==1) { 						
 			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				logger.info(String.valueOf(mejora01.getPrecio()));
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(dinero_total>=100) {
-					dinero_total-=mejora01.getPrecio();
-					dinero_por_segundo=(int) mejora01.efecto(mejora01.getIncrementoDps(),dinero_por_segundo);
-					
-					puntuacion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
-					logger.info("La mejora 1 se ha aplicado correctamente");
 					pMejoras.remove(mejora1);
 					mejora1.setOpaque(false);
-					setVisible(false);
-					setVisible(true);	
-					hilo.interrupt();
-					
-				}
-			}
-		});	
-		pMejoras.setLayout(new GridLayout(5, 2));
-		pMejoras.add(mejora1);	
+					repaint();				
+					}
+				}	
 		 
 		////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////// MODIFICACIÓN DE LA MEJORA 2 CON SU EVENTO DE RATON ////////////////////////////////////////
@@ -468,7 +492,9 @@ public class VentanaClick extends JFrame {
 		mejora2.setOpaque(true);
 		String textoMejora2="Gana 10 veces mas dinero por click";
 		mejora2.setToolTipText(textoMejora2);
-		mejora2.addMouseListener(new MouseAdapter() {
+		for (mejorasPorUsuario mejorUs : listamejorasUsu) {
+			if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Se tu propio jefe")&& mejorUs.getCantidad()==0) {	
+				mejora2.addMouseListener(new MouseAdapter() {
 		
 		@Override
 		public void mouseExited(MouseEvent e) {
@@ -478,7 +504,7 @@ public class VentanaClick extends JFrame {
 		
 		@Override
 		public void mouseEntered(MouseEvent e) {
-		logger.info(String.valueOf(mejora01.getPrecio()));
+		logger.info(String.valueOf(mejora02.getPrecio()));
 		
 		}
 		
@@ -490,14 +516,22 @@ public class VentanaClick extends JFrame {
 					
 					logger.info("La mejora 2 se ha aplicado correctamente");
 					pMejoras.remove(mejora2);
+					cc.actualizarPersonalMejoras("Usuario.db", VentanaUsuario.usuarioActual.getnUsuario(), "Se tu propio jefe", 1);
+					pMejoras.remove(mejora2);
 					mejora2.setOpaque(false);
-					setVisible(false);
-					setVisible(true);	
-					hilo.interrupt();
+					repaint();	
 					
 					}
+			
 				}
 			});	
+			} else if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Se tu propio jefe")&& mejorUs.getCantidad()==1) { 						
+			
+				pMejoras.remove(mejora2);
+				mejora2.setOpaque(false);
+				repaint();				
+				}
+			}	
 		pMejoras.setLayout(new GridLayout(5, 2));
 		pMejoras.add(mejora2);	
 
@@ -510,7 +544,9 @@ public class VentanaClick extends JFrame {
 		mejora3.setOpaque(true);
 		String textoMejora3="Duplica tu capital con un solo click";
 		mejora3.setToolTipText(textoMejora3);
-		mejora3.addMouseListener(new MouseAdapter() {
+		for (mejorasPorUsuario mejorUs : listamejorasUsu) {
+			if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Loteria del Estado")&& mejorUs.getCantidad()==0) {	
+				mejora3.addMouseListener(new MouseAdapter() {
 		
 		@Override
 		public void mouseExited(MouseEvent e) {
@@ -520,7 +556,7 @@ public class VentanaClick extends JFrame {
 		
 		@Override
 		public void mouseEntered(MouseEvent e) {
-		logger.info(String.valueOf(mejora01.getPrecio()));
+		logger.info(String.valueOf(mejora03.getPrecio()));
 		
 		}
 		
@@ -533,15 +569,23 @@ public class VentanaClick extends JFrame {
 					puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
 					
 					logger.info("La mejora 2 se ha aplicado correctamente");
+					cc.actualizarPersonalMejoras("Usuario.db", VentanaUsuario.usuarioActual.getnUsuario(), "Loteria del Estado", 1);
+
 					pMejoras.remove(mejora3);
 					mejora3.setOpaque(false);
-					setVisible(false);
-					setVisible(true);	
-					hilo.interrupt();
+					repaint();
 					
 					}
 				}
 			});	
+			} else if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Loteria del Estado")&& mejorUs.getCantidad()==1) { 						
+			
+				pMejoras.remove(mejora3);
+				mejora3.setOpaque(false);
+				repaint();				
+				}
+			}	
+		
 		pMejoras.setLayout(new GridLayout(5, 2));
 		pMejoras.add(mejora3);	
 		
@@ -555,7 +599,9 @@ public class VentanaClick extends JFrame {
 		mejora4.setOpaque(true);
 		String textoMejora4="Duplica el dinero por segundo que ganas";
 		mejora4.setToolTipText(textoMejora4);
-		mejora4.addMouseListener(new MouseAdapter() {
+		for (mejorasPorUsuario mejorUs : listamejorasUsu) {
+			if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Suben las acciones de tu empresa")&& mejorUs.getCantidad()==0) {	
+				mejora4.addMouseListener(new MouseAdapter() {
 		
 		@Override
 		public void mouseExited(MouseEvent e) {
@@ -577,15 +623,21 @@ public class VentanaClick extends JFrame {
 		
 					puntuacion.setText("Producción por segundo: "+String.valueOf(dinero_por_segundo)+" $/seg");
 					logger.info("La mejora 4 se ha aplicado correctamente");
+					cc.actualizarPersonalMejoras("Usuario.db", VentanaUsuario.usuarioActual.getnUsuario(), "Suben las acciones de tu empresa", 1);
 					pMejoras.remove(mejora4);
 					mejora4.setOpaque(false);
-					setVisible(false);
-					setVisible(true);	
-					hilo.interrupt();
+					repaint();
 		
 				}
 			}
 		});	
+			} else if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Suben las acciones de tu empresa")&& mejorUs.getCantidad()==1) { 						
+				
+				pMejoras.remove(mejora4);
+				mejora4.setOpaque(false);
+				repaint();				
+				}
+			}	
 		pMejoras.setLayout(new GridLayout(5, 2));
 		pMejoras.add(mejora4);
 		
@@ -598,7 +650,9 @@ public class VentanaClick extends JFrame {
 		mejora5.setOpaque(true);
 		String textoMejora5="Gana 10 veces mas dinero por click";
 		mejora5.setToolTipText(textoMejora5);
-		mejora5.addMouseListener(new MouseAdapter() {
+		for (mejorasPorUsuario mejorUs : listamejorasUsu) {
+			if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Ingresaste en la facultad de ADE")&& mejorUs.getCantidad()==0) {	
+				mejora3.addMouseListener(new MouseAdapter() {
 		
 		@Override
 		public void mouseExited(MouseEvent e) {
@@ -619,15 +673,21 @@ public class VentanaClick extends JFrame {
 				dinero_click=(int) mejora05.efecto(mejora05.getIncrementoDc(),dinero_click);
 		
 				logger.info("La mejora 5 se ha aplicado correctamente");
+				cc.actualizarPersonalMejoras("Usuario.db", VentanaUsuario.usuarioActual.getnUsuario(), "Ingresaste en la facultad de ADE", 1);
 				pMejoras.remove(mejora5);
-				mejora2.setOpaque(false);
-				setVisible(false);
-				setVisible(true);	
-				hilo.interrupt();
+				mejora5.setOpaque(false);
+				repaint();
 		
 				}
 			}
 		});	
+			} else if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs.getCodUsuario())&& mejorUs.getCodMejora().equals("Ingresaste en la facultad de ADE")&& mejorUs.getCantidad()==1) { 						
+				
+				pMejoras.remove(mejora5);
+				mejora5.setOpaque(false);
+				repaint();				
+				}
+			}	
 		pMejoras.setLayout(new GridLayout(5, 2));
 		pMejoras.add(mejora5);
 
@@ -639,8 +699,10 @@ public class VentanaClick extends JFrame {
 		mejora6.setBackground(Color.YELLOW);
 		mejora6.setOpaque(true);
 		String textoMejora6="Duplica tu capital con un solo click";
-		mejora6.setToolTipText(textoMejora3);
-		mejora6.addMouseListener(new MouseAdapter() {
+		mejora6.setToolTipText(textoMejora6);
+		for (mejorasPorUsuario mejorUs2 : listamejorasUsu) {
+			if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs2.getCodUsuario())&& mejorUs2.getCodMejora().equals("La mafia compra tu silencio")&& mejorUs2.getCantidad()==0) {	
+				mejora3.addMouseListener(new MouseAdapter() {
 		
 		@Override
 		public void mouseExited(MouseEvent e) {
@@ -663,15 +725,20 @@ public class VentanaClick extends JFrame {
 				puntuacion.setText("Ca$h Money Baby: "+String.valueOf(dinero_total));
 				
 				logger.info("La mejora 6 se ha aplicado correctamente");
+				cc.actualizarPersonalMejoras("Usuario.db", VentanaUsuario.usuarioActual.getnUsuario(), "La mafia compra tu silencio", 1);
 				pMejoras.remove(mejora6);
 				mejora6.setOpaque(false);
-				setVisible(false);
-				setVisible(true);	
-				hilo.interrupt();
+				repaint();
 				
 			}
 			}
 		});	
+			} else if (VentanaUsuario.usuarioActual.getnUsuario().equals(mejorUs2.getCodUsuario())&& mejorUs2.getCodMejora().equals("La mafia compra tu silencio")&& mejorUs2.getCantidad()==1) { 						
+				pMejoras.remove(mejora6);
+				mejora6.setOpaque(false);
+				repaint();				
+				}
+			}	
 		pMejoras.setLayout(new GridLayout(5, 2));
 		pMejoras.add(mejora6);	
 				
@@ -784,6 +851,9 @@ public class VentanaClick extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				cc.actualizarPartida("Usuario.db",VentanaUsuario.usuarioActual.getnUsuario(),dinero_total,dinero_click,dinero_por_segundo);	
+				//for(Mejoras mejor : listaMejoras) {
+				//	cc.actualizarPersonalMejoras("Usuario.db", VentanaUsuario.usuarioActual.getnUsuario(), mejor.getNombre(),cantidadMejora);
+				//}				
 				for(int i = 0; i<listaEdifs.size(); i++) {
 					cc.actualizarPersonalEdifi2("Usuario.db",VentanaUsuario.usuarioActual.getnUsuario(), listaEdifs.get(i).getNombre(),(int) listaEdifs.get(i).geteCantidad());
 				}				
@@ -863,9 +933,8 @@ public class VentanaClick extends JFrame {
 				
 			}
 		});
+			}
 
-		
-	}
 	
 	public static void main(String[] args) {
 		VentanaClick v = new VentanaClick();
