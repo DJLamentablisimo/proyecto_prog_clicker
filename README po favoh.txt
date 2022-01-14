@@ -1,0 +1,1 @@
+La clase principal a ejecutar es VentanaInicial. Dese ahí se puede crear un nuevo usuario o insertar en uno ya existente. Si da algún problema de librerías intentar insertar la librería de SQLite. No hemos podido crear el ejecutable por problemas con Gradle.
